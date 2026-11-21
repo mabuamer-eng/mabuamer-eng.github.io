@@ -44,6 +44,12 @@ table{width:100%;border-collapse:collapse;font-size:.82rem}th,td{padding:4px 3px
 details{margin:8px 0;border:1px solid var(--line);border-radius:12px;padding:6px 12px}summary{cursor:pointer;padding:6px 0;font-weight:700}details p{margin:4px 0 8px;font-size:.95rem}
 .owner{text-align:center;font-size:1.9rem;font-weight:800;line-height:1.4;padding:14px 10px;margin:0 0 14px;border-radius:16px;color:#fff;background:linear-gradient(135deg,#4f46e5,#06b6d4);box-shadow:0 6px 22px #0000002a;letter-spacing:.3px}
 @media(max-width:480px){.owner{font-size:1.5rem}}
+.ap{cursor:pointer}.ap:hover{opacity:.85}.ap.sel{filter:drop-shadow(0 0 4px #ef4444)}
+svg{direction:ltr}
+@keyframes spin{to{transform:rotate(360deg)}}
+.whl{transform-box:fill-box;transform-origin:center;animation:spin 1s linear infinite}
+.road{fill:none;stroke:var(--mute);stroke-width:3;stroke-dasharray:14 12;animation:flow .6s linear infinite}
+.road.rv{animation-direction:reverse}
 </style>
 </head>
 <body>
@@ -103,6 +109,13 @@ details{margin:8px 0;border:1px solid var(--line);border-radius:12px;padding:6px
   <button data-t="t50">المجموعة الكوكبية</button>
   <button data-t="t51">شرح الأوتوماتيك</button>
   <button data-t="t52">مقاسات الإطارات</button>
+  <button data-t="t53">محاكاة المحرك الرباعي</button>
+  <button data-t="t54">محاكاة الهايبرد</button>
+  <button data-t="t55">دارة كهرباء السيارة</button>
+  <button data-t="t56">حساسات السيارة</button>
+  <button data-t="t57">كفاءة الوقود</button>
+  <button data-t="t58">قدرة السير على الطريق</button>
+  <button data-t="t59">تشريح المحرك</button>
   <button data-t="t1">قانون أوم</button>
   <button data-t="t2">تحويل وحدات</button>
   <button data-t="t3">ألوان المقاومة</button>
@@ -673,6 +686,70 @@ details{margin:8px 0;border:1px solid var(--line);border-radius:12px;padding:6px
   <button class="btn" id="tyGo">احسب وارسم</button>
   <svg id="tySvg" class="dg" viewBox="0 0 300 150"></svg>
   <div class="out" id="tyOut"></div>
+</section>
+
+<section class="card" id="t53">
+  <p class="sub">محاكاة حيّة لمحرك البنزين رباعي الأشواط: الكباس والصمامات والشرارة وضغط الأسطوانة خلال دورة كاملة (720° كرنك).</p>
+  <div class="g"><div><label>نسبة الانضغاط</label><input id="fsC" type="number" step="any" value="10"></div></div>
+  <label>زاوية الكرنك: <b id="fsAv">0</b>° من 720</label>
+  <input id="fsA" type="range" min="0" max="720" value="0">
+  <button class="btn" id="fsPlay">▶ تشغيل</button>
+  <svg id="fsSvg" class="dg" viewBox="0 0 300 340"></svg>
+  <div class="out" id="fsOut"></div>
+</section>
+
+<section class="card" id="t54">
+  <p class="sub">محاكاة هايبرد بمقطع سيارة: اختار الحالة وشوف كيف بتنتقل الطاقة بين البطارية والإنفرتر والمحركات والعجلات. الكابلات البرتقالية هي كابلات الجهد العالي، وسماكة السهم = كمية القدرة.</p>
+  <label>الحالة (15 حالة)</label>
+  <select id="hbM"><option value="rd">وقوف وجاهزية (Ready)</option><option value="st" selected>بدء الحركة من الوقوف (كهرباء)</option><option value="ck">بدء تشغيل محرك البنزين بالمولّد</option><option value="ev">زحمة سير بطيئة (كهرباء فقط)</option><option value="cr">سرعة ثابتة على الطريق السريع</option><option value="ac">تسارع قوي (تجاوز)</option><option value="hl">صعود طلعة</option><option value="ch">شحن البطارية والسيارة واقفة</option><option value="rg">كبح خفيف (استرجاع)</option><option value="hb">كبح قوي (استرجاع + فرامل)</option><option value="co">رفع الدواسة (انسياب)</option><option value="cd">تشغيل بارد (تسخين المحرك)</option><option value="rv">رجوع للخلف (كهرباء)</option><option value="fl">بطارية ممتلئة (الاسترجاع محدود)</option><option value="lo">بطارية منخفضة (المحرك يشحن)</option></select>
+  <div class="g"><div><label>القدرة المطلوبة عند العجلات (kW)</label><input id="hbP" type="number" step="any" value="15"></div><div><label>سرعة السيارة (كم/س)</label><input id="hbV" type="number" step="any" value="10"></div><div><label>شحن البطارية SOC (%)</label><input id="hbS" type="number" step="any" value="60"></div><div><label>قدرة محرك البنزين (kW)</label><input id="hbE" type="number" step="any" value="70"></div><div><label>قدرة المحرك الكهربائي (kW)</label><input id="hbO" type="number" step="any" value="50"></div><div><label>سعة البطارية (kWh)</label><input id="hbB" type="number" step="any" value="1.3"></div><div><label>كتلة السيارة (kg)</label><input id="hbW" type="number" step="any" value="1400"></div></div>
+  <button class="btn" id="hbTrip">▶ رحلة تلقائية (كل الحالات بالتتابع)</button>
+  <div id="hbPh" style="margin-top:8px;font-weight:700"></div>
+  <svg id="hbSvg" class="dg" viewBox="0 0 300 235"></svg>
+  <svg id="hbSoc" class="dg" viewBox="0 0 300 110" style="display:none"></svg>
+  <div class="out" id="hbOut"></div>
+</section>
+
+<section class="card" id="t55">
+  <p class="sub">دارة إنارة بالريليه: دارة تحكم بتيار صغير بتشغّل دارة حمل بتيار كبير. اضغط القائمة لتشغيل المفتاح وإطفائه.</p>
+  <label>حالة المفتاح</label>
+  <select id="cbS"><option value="1" selected>مشغّل (ON)</option><option value="0">مطفأ (OFF)</option></select>
+  <div class="g"><div><label>قدرة اللمبة الواحدة (واط)</label><input id="cbP" type="number" step="any" value="55"></div><div><label>عدد اللمبات</label><input id="cbN" type="number" step="any" value="2"></div><div><label>جهد البطارية (فولت)</label><input id="cbV" type="number" step="any" value="12"></div></div>
+  <svg id="cbSvg" class="dg" viewBox="0 0 300 175"></svg>
+  <div class="out" id="cbOut"></div>
+</section>
+
+<section class="card" id="t56">
+  <p class="sub">حساسات المحرك: اختار الحساس وحرّك الشريط وشوف الإشارة اللي بترسلها للكمبيوتر (ECU).</p>
+  <label>الحساس</label>
+  <select id="snT"><option value="0">حرارة السائل (NTC)</option><option value="1">الخانق (TPS)</option><option value="2">الأكسجين (لامدا)</option><option value="3">ضغط المنفّذ (MAP)</option><option value="4">وضع الكرنك (60-2)</option></select>
+  <label><span id="snL"></span>: <b id="snVv"></b></label>
+  <input id="snV" type="range" min="-20" max="120" step="1" value="90">
+  <svg id="snSvg" class="dg" viewBox="0 0 300 190"></svg>
+  <div class="out" id="snOut"></div>
+</section>
+
+<section class="card" id="t59">
+  <p class="sub">مقطع بالمحرك: اضغط على أي قطعة بالرسمة وشوف شو وظيفتها.</p>
+  <svg id="anSvg" class="dg" viewBox="0 0 300 290"></svg>
+  <div class="out" id="anOut">👆 اضغط على قطعة (الكباس، الصمام، الشمعة، الكرنك...)</div>
+</section>
+
+<section class="card" id="t57">
+  <p class="sub">كفاءة المحرك الحرارية واستهلاك الوقود، مع شرح القانون وتوزيع الطاقة.</p>
+  <label>نوع الوقود</label><select id="ftT"><option value="0.745,43.5">بنزين</option><option value="0.832,42.8">ديزل</option></select>
+  <div class="g"><div><label>قدرة المحرك (kW)</label><input id="ftP" type="number" step="any" value="60"></div><div><label>استهلاك الوقود (لتر/ساعة)</label><input id="ftF" type="number" step="any" value="18"></div><div><label>سرعة السيارة (كم/س)</label><input id="ftS" type="number" step="any" value="90"></div></div>
+  <button class="btn" id="ftGo">احسب وارسم</button>
+  <svg id="ftSvg" class="dg" viewBox="0 0 300 110"></svg>
+  <div class="out" id="ftOut"></div>
+</section>
+
+<section class="card" id="t58">
+  <p class="sub">القدرة اللازمة لمشي السيارة بسرعة ثابتة: مقاومة الهوا والإطارات والطلعة.</p>
+  <div class="g"><div><label>كتلة السيارة (kg)</label><input id="rlM" type="number" step="any" value="1400"></div><div><label>CdA = معامل السحب × المساحة (m²)</label><input id="rlC" type="number" step="any" value="0.65"></div><div><label>معامل مقاومة الدحرجة Crr</label><input id="rlR" type="number" step="any" value="0.012"></div><div><label>السرعة (كم/س)</label><input id="rlV" type="number" step="any" value="100"></div><div><label>ميل الطريق (%)</label><input id="rlG" type="number" step="any" value="0"></div><div><label>كفاءة نقل الحركة (%)</label><input id="rlE" type="number" step="any" value="90"></div></div>
+  <button class="btn" id="rlGo">احسب وارسم</button>
+  <svg id="rlSvg" class="dg" viewBox="0 0 300 110"></svg>
+  <div class="out" id="rlOut"></div>
 </section>
 
 <footer>بواسطة المهندس محمد فواز أبو عامر 🛠️</footer>
@@ -1390,6 +1467,215 @@ var N2={t48:'الدفرنس بيخلي العجلتين تلفوا بسرعتي�
 Object.keys(N2).forEach(function(id){var sc=$(id);if(!sc)return;var d=document.createElement('div');d.className='say';d.innerHTML='💡 '+N2[id];var p=sc.querySelector('.sub');if(p)p.parentNode.insertBefore(d,p.nextSibling);else sc.insertBefore(d,sc.firstChild)});
 CAT[2][1]=['t46','t47','t48','t52','t17','t18'];
 CAT.splice(3,0,['أوتوماتيك',['t51','t49','t50']]);
+$('cats').innerHTML='';
+CAT.forEach(function(c,i){var b=document.createElement('button');b.textContent=c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
+setCat(0);
+
+/* ===== محاكاة وتفاعل ===== */
+var fsTm=null;
+function fsc(th,CR){
+  var S=86,r=43,l=143,ph=(th%360)*Math.PI/180,x=(r+l)-(r*Math.cos(ph)+Math.sqrt(l*l-r*r*Math.sin(ph)*Math.sin(ph))),vc=1/(CR-1),v=vc+x/S,vb=vc+1,P;
+  if(th<180)P=0.9;else if(th<360)P=0.9*Math.pow(vb/v,1.35);else if(th<540)P=0.9*Math.pow(vb/vc,1.35)*3.2*Math.pow(vc/v,1.3);else P=1.1;
+  return {ph:ph,P:P};
+}
+function fs(){
+  var th=+$('fsA').value,CR=g('fsC');if(!(CR>2))CR=10;
+  $('fsAv').textContent=th;
+  var c=fsc(th,CR),sc=.8,cy=250,rr=43*sc,ph=c.ph,sn=Math.sin(ph),cs=Math.cos(ph),pinY=cy-(43*cs+Math.sqrt(143*143-43*43*sn*sn))*sc,px=140+rr*sn,py=cy-rr*cs,k=Math.floor(th/180)%4;
+  var io=th<=220||th>=710,eo=th>=495||th<=10,sp=th>=345&&th<=360,col=['#93c5fd','#60a5fa','#f97316','#9ca3af'][k],nm=['شوط السحب','شوط الضغط','شوط الاحتراق (القدرة)','شوط العادم'],pt=pinY-16,o='',i;
+  o+='<rect x="90" y="75" width="100" height="'+(pt-75)+'" style="fill:'+col+';opacity:.55"/><path d="M90 75V190M190 75V190" style="stroke:var(--ink);stroke-width:3"/><rect x="80" y="50" width="120" height="25" style="fill:var(--line);stroke:var(--ink);stroke-width:2"/>';
+  o+='<rect x="136" y="26" width="8" height="26" style="fill:var(--mute)"/>'+(sp?'<circle cx="140" cy="78" r="10" style="fill:#fde047;opacity:.95"/>':'');
+  o+='<rect x="110" y="30" width="4" height="'+(io?53:46)+'" style="fill:#3b82f6"/><rect x="100" y="'+(io?83:75)+'" width="24" height="4" style="fill:#3b82f6"/><rect x="166" y="30" width="4" height="'+(eo?53:46)+'" style="fill:#f59e0b"/><rect x="156" y="'+(eo?83:75)+'" width="24" height="4" style="fill:#f59e0b"/>';
+  if(io)o+='<path d="M112 6V24m-5 -7l5 7l5 -7" style="stroke:#3b82f6;stroke-width:3;fill:none"/>';
+  if(eo)o+='<path d="M168 24V6m-5 7l5 -7l5 7" style="stroke:#f59e0b;stroke-width:3;fill:none"/>';
+  o+='<rect x="92" y="'+pt+'" width="96" height="30" rx="4" style="fill:var(--acc);opacity:.9"/><path d="M92 '+(pt+7)+'H188M92 '+(pt+12)+'H188" style="stroke:var(--ink);stroke-width:1.5"/>';
+  o+='<circle cx="140" cy="'+cy+'" r="'+rr+'" style="fill:none;stroke:var(--mute);stroke-dasharray:3 3"/><path d="M140 '+pinY+'L'+px+' '+py+'" style="stroke:var(--ink);stroke-width:5;stroke-linecap:round"/><circle cx="140" cy="'+pinY+'" r="4" style="fill:var(--ink)"/><circle cx="'+(140-rr*.9*sn)+'" cy="'+(cy+rr*.9*cs)+'" r="9" style="fill:var(--mute)"/><circle cx="'+px+'" cy="'+py+'" r="5" style="fill:var(--ink)"/><circle cx="140" cy="'+cy+'" r="6" style="fill:var(--ink)"/>';
+  o+='<text x="150" y="14" style="fill:var(--ink);font-size:13;font-weight:800;text-anchor:middle">'+nm[k]+'</text><g style="fill:var(--ink);font-size:10.5"><text x="208" y="95">السحب: <tspan style="font-weight:700">'+(io?'مفتوح':'مغلق')+'</tspan></text><text x="208" y="113">العادم: <tspan style="font-weight:700">'+(eo?'مفتوح':'مغلق')+'</tspan></text><text x="208" y="131">الشرارة: <tspan style="font-weight:700">'+(sp?'تشتغل!':'لا')+'</tspan></text><text x="208" y="149">الضغط: <tspan style="font-weight:700">'+num(c.P)+' bar</tspan></text></g>';
+  var Pm=0,ys=[];for(i=0;i<=180;i++){var q=fsc(i*4,CR).P;ys.push(q);Pm=Math.max(Pm,q)}
+  o+='<path d="M30 335H282M30 335V278" style="stroke:var(--mute);fill:none"/><path d="'+ys.map(function(y,j){return (j?'L':'M')+(30+j/180*250)+' '+(335-y/Pm*55)}).join('')+'" style="'+ZS+'"/><path d="M'+(30+th/720*250)+' 278V335" style="stroke:#ef4444;stroke-dasharray:3 3"/><circle cx="'+(30+th/720*250)+'" cy="'+(335-c.P/Pm*55)+'" r="4" style="fill:#ef4444"/><text x="32" y="276" style="fill:var(--mute);font-size:9">منحنى الضغط خلال 720°</text>';
+  $('fsSvg').innerHTML=o;
+  var ex=['الكباس ينزل وصمام السحب مفتوح، فيدخل الهوا والبنزين.','الصمامين مسكرين والكباس يطلع، فبينضغط الخليط وبيسخن. قبل أعلى نقطة بقليل بتطلع الشرارة.','الخليط بيشتعل والغازات بتتمدد وبتدفع الكباس لتحت. هاد الشوط الوحيد اللي بيعطي شغل.','صمام العادم مفتوح والكباس يطلع، فبيطرد الغازات المحروقة.'][k];
+  $('fsOut').innerHTML='<b>'+nm[k]+'</b>: '+ex+'<br>ضغط الأسطوانة التقريبي = <b>'+num(c.P)+'</b> bar<br><small>القانون: أثناء الانضغاط P × V^1.35 = ثابت، وبعد الاحتراق الضغط بيقفز بحوالي 3 أضعاف. القيم تقريبية للتعلم. شوط واحد = 180° كرنك، والدورة الكاملة = 720°.</small>';
+}
+$('fsA').addEventListener('input',fs);$('fsC').addEventListener('input',fs);
+$('fsPlay').onclick=function(){
+  if(fsTm){clearInterval(fsTm);fsTm=null;this.textContent='▶ تشغيل';return}
+  this.textContent='⏸ إيقاف';
+  fsTm=setInterval(function(){$('fsA').value=(+$('fsA').value+4)%721;fs()},50);
+};
+fs();
+/* هايبرد */
+function flw(pts,kw,col,rev,lab){
+  if(kw<0.2)return '';
+  var p=rev?pts.slice().reverse():pts,w=Math.max(3,Math.min(10,kw/70*10)),d='M'+p.map(function(q){return q.join(' ')}).join('L'),a=p[p.length-2],b=p[p.length-1],an=Math.atan2(b[1]-a[1],b[0]-a[0]),s=w+4,
+  t=[b,[b[0]-s*Math.cos(an-.5),b[1]-s*Math.sin(an-.5)],[b[0]-s*Math.cos(an+.5),b[1]-s*Math.sin(an+.5)]];
+  return '<path d="'+d+'" class="fl" style="stroke:'+col+';stroke-width:'+w+'"/><polygon points="'+t.map(function(q){return q.join(',')}).join(' ')+'" style="fill:'+col+'"/>'+(lab?'<text x="'+lab[0]+'" y="'+lab[1]+'" style="fill:var(--ink);font-size:9;font-weight:700;text-anchor:middle">'+num(kw)+' kW</text>':'');
+}
+var HBN={rd:'وقوف وجاهزية (Ready)',st:'بدء الحركة من الوقوف',ck:'بدء تشغيل محرك البنزين',ev:'زحمة سير (كهرباء فقط)',cr:'سرعة ثابتة على الطريق',ac:'تسارع قوي (تجاوز)',hl:'صعود طلعة',ch:'شحن البطارية والسيارة واقفة',rg:'كبح خفيف',hb:'كبح قوي',co:'رفع الدواسة (انسياب)',cd:'تشغيل بارد (تسخين المحرك)',rv:'رجوع للخلف',fl:'بطارية ممتلئة',lo:'بطارية منخفضة'};
+var HBD={rd:[0,0,60],st:[15,10,60],ck:[0,0,50],ev:[8,30,60],cr:[25,100,55],ac:[90,80,70],hl:[85,60,65],ch:[0,0,40],rg:[15,50,60],hb:[80,90,70],co:[5,60,60],cd:[0,0,40],rv:[10,5,60],fl:[35,90,95],lo:[20,60,12]};
+var HBT={rd:'السيارة جاهزة بس واقفة. البطارية بس بتغذي دارة الـ 12 فولت (أنوار، كمبيوتر، راديو) عبر محول DC-DC.',st:'البطارية (DC) ← الإنفرتر (يحوّل DC إلى AC) ← المحرك الكهربائي MG2 ← العجلات. محرك البنزين مطفأ، فبدون وقود ولا ضجيج.',ck:'البطارية (DC) ← الإنفرتر (DC إلى AC) ← المولّد MG1 بيشتغل كمارش ← بيلف محرك البنزين لحد ما يشتغل. بياخد ثواني قليلة.',ev:'زحمة سير: كهرباء فقط. البطارية ← الإنفرتر ← MG2 ← العجلات. المحرك مطفأ.',cr:'المحرك بيدفع العجلات مباشرة. إذا الشحن قليل، جزء من قدرته بيروح للمولّد MG1 ← الإنفرتر (AC إلى DC) ← البطارية. وإذا الحاجة أكبر، MG2 بيكمّل.',ac:'المحرك بأقصى قدرته، والبطارية ← الإنفرتر ← MG2 بيكمّل الباقي. الاتنين بيدفعوا العجلات مع بعض.',hl:'طلعة: المحرك بأقصى قدرته والبطارية بتساعد عبر الإنفرتر والمحرك الكهربائي. الشحن بينزل بسرعة لو الطلعة طويلة.',ch:'المحرك ← المولّد MG1 ← الإنفرتر (AC إلى DC) ← البطارية. السيارة واقفة والمحرك بيشتغل لشحن البطارية.',rg:'كبح خفيف: العجلات بتدوّر MG2 فبيصير مولّد ← الإنفرتر (AC إلى DC) ← البطارية، بدل ما تضيع الطاقة حرارة بالفرامل.',hb:'كبح قوي: MG2 بياخد أكتر ما يقدر (حدّ البطارية)، والباقي بتاخده الفرامل العادية.',co:'رفع الدواسة: MG2 بيبطّئ السيارة شوي ويشحن، بدون استهلاك وقود.',cd:'تشغيل بارد: المحرك بيشتغل لحاله حتى يسخن ويحمي الكتالايزر، وبيشحن البطارية شوي.',rv:'رجوع للخلف: MG2 بيلف بالاتجاه المعاكس. محرك البنزين ما بيشتغل.',fl:'البطارية ممتلئة: ما بتقدر تستقبل شحن، فالكبح كله بالفرامل العادية.',lo:'البطارية منخفضة: المحرك بيشتغل أكتر من اللازم ويشحنها وإنت ماشي حتى ترجع لمستوى آمن.'};
+var HB_last=0,HB_kind='ev',tripTm=null,tripI=0,tripT=0,HBH=[];
+var TRIP=[['rd',3],['st',5],['ev',6],['ck',3],['cr',8],['ac',5],['hl',6],['co',4],['rg',4],['hb',3],['rd',2],['ch',6],['rv',3]];
+function hb(){
+  var m=$('hbM').value,dem=g('hbP'),vv=g('hbV'),soc=g('hbS'),Em=g('hbE'),Mm=g('hbO'),B=g('hbB'),mass=g('hbW');
+  if([dem,vv,soc,Em,Mm,B,mass].some(isNaN)||dem<0||vv<0||soc<0||soc>100||Em<=0||Mm<=0||B<=0||mass<=0){$('hbOut').textContent='تأكد من القيم.';return}
+  var eo=Math.min(Em,35),ei=0.97,em=0.93,eg=0.93,maxChg=30,maxDis=45,Pew=0,Pg=0,Pm=0,Pr=0,Pc=0,note='',rev=m==='rv';
+  var pgMax=maxChg/(eg*ei),prMax=maxChg/(em*ei),pmMax=maxDis*em*ei;
+  if((m==='st'||m==='ev'||m==='rv')&&soc<20){m='lo';rev=false;note='⚠️ البطارية منخفضة (أقل من 20%)، فاشتغل المحرك بدل الكهربا فقط.<br>'}
+  if(soc<10&&(m==='ac'||m==='hl'||m==='cr')){pmMax=0;note='⚠️ البطارية شبه فارغة: المحرك الكهربائي ما بيساعد.<br>'}
+  if(m==='st'||m==='ev'||m==='rv'){Pm=Math.min(dem,Mm,pmMax)}
+  else if(m==='ck'){Pc=3}
+  else if(m==='cr'){Pew=Math.min(dem,eo);Pm=Math.min(Math.max(0,dem-Pew),Mm,pmMax);if(soc<60)Pg=Math.max(0,Math.min(5,Em-Pew))}
+  else if(m==='ac'||m==='hl'){Pew=Math.min(dem,Em);Pm=Math.min(Math.max(0,dem-Pew),Mm,pmMax)}
+  else if(m==='ch'){Pew=Math.min(dem,eo);Pg=soc>=95?0:Math.min(eo-Pew,pgMax)}
+  else if(m==='lo'){Pew=Math.min(dem,eo);Pm=Math.min(Math.max(0,dem-Pew),Mm,pmMax);Pg=soc>=95?0:Math.max(0,Math.min(Em-Pew,20,pgMax))}
+  else if(m==='cd'){Pew=Math.min(dem,eo);Pg=soc>=95?0:Math.min(5,pgMax)}
+  else if(m==='rg'||m==='hb'||m==='co'||m==='fl'){Pr=soc>=95?0:Math.min(dem,Mm,prMax)}
+  var still=m==='rd'||m==='ck'||m==='ch'||m==='cd',v=still?0:vv,isReg=m==='rg'||m==='hb'||m==='co'||m==='fl',fric=isReg?Math.max(0,dem-Pr):0;
+  var ge=Pg*eg,re=Pr*em,me=Pm/em,S=ge+re-me-Pc,chg=S>0?S*ei:0,dis=S<0?-S/ei:0,net=dis+0.3-chg,Pe=Pew+Pg,fuel=Pe*3600/(0.35*43500)/0.745,dsoc=-net/60/B*100,Ek=0.5*mass*Math.pow(vv/3.6,2)/3.6e6*1000,loss=(me+Pc+ge+re)*0.03,engOn=Pe>0.05||m==='ck';
+  HB_last=dsoc;HB_kind=Pr>0.05?'reg':(Pe>0.05&&chg>0.05?'chg':(Pe>0.05?'eng':'ev'));
+  var ME='#f59e0b',AC='#8b5cf6',DC='#3b82f6',RG='#10b981',OR='#fb923c',o='';
+  var dur=v<1?0:0.25+(1-Math.min(v,120)/120)*1.6,an=(dur?'animation-duration:'+dur+'s;':'animation-play-state:paused;')+(rev?'animation-direction:reverse;':'');
+  var wh=function(cx){return '<g class="whl" style="'+an+'"><circle cx="'+cx+'" cy="150" r="21" style="fill:#1f2937"/><circle cx="'+cx+'" cy="150" r="12" style="fill:var(--line);stroke:var(--mute)"/><path d="M'+(cx-12)+' 150H'+(cx+12)+'M'+cx+' 138V162M'+(cx-8.5)+' 141.5L'+(cx+8.5)+' 158.5M'+(cx+8.5)+' 141.5L'+(cx-8.5)+' 158.5" style="stroke:var(--mute);stroke-width:2"/></g>'};
+  o+='<path d="M0 172H300" style="stroke:var(--line);stroke-width:2"/>'+(v>=1?'<path class="road'+(rev?' rv':'')+'" d="M0 178H300"/>':'');
+  o+='<path d="M12 140C12 118 16 92 34 86L96 81C106 80 112 77 118 71L134 57C138 53 146 53 152 53L200 53C212 53 222 60 230 72L248 96L272 102C284 106 290 120 290 140L290 156L12 156Z" style="fill:var(--line);fill-opacity:.5;stroke:var(--ink);stroke-width:2.5"/><path d="M122 70L136 59L196 59C208 59 216 65 223 75L236 94L122 94Z" style="fill:#93c5fd;fill-opacity:.35"/>';
+  o+='<circle cx="70" cy="150" r="27" style="fill:var(--card)"/><circle cx="238" cy="150" r="27" style="fill:var(--card)"/>'+wh(70)+wh(238);
+  if(fric>0.5)o+='<circle cx="70" cy="150" r="24" style="fill:none;stroke:#ef4444;stroke-width:3"/><circle cx="238" cy="150" r="24" style="fill:none;stroke:#ef4444;stroke-width:3"/><text x="154" y="152" style="fill:#ef4444;font-size:9;font-weight:700;text-anchor:middle">🛑 فرامل '+num(fric)+' kW</text>';
+  o+='<rect x="20" y="92" width="40" height="30" rx="5" style="fill:'+ME+';fill-opacity:'+(engOn?.45:.12)+';stroke:'+ME+';stroke-width:2.5"/><path d="M27 97V112M35 97V112M43 97V112M51 97V112" style="stroke:'+ME+';stroke-width:4;opacity:.7"/><text x="40" y="119" style="fill:var(--ink);font-size:7.5;text-anchor:middle;font-weight:700">محرك</text>';
+  o+='<rect x="86" y="100" width="62" height="28" rx="6" style="fill:var(--card);stroke:var(--ink);stroke-width:2"/><circle cx="102" cy="114" r="9" style="fill:none;stroke:'+AC+';stroke-width:2.5"/><circle cx="130" cy="114" r="9" style="fill:none;stroke:'+AC+';stroke-width:2.5"/><text x="102" y="116.5" style="fill:var(--ink);font-size:6.5;text-anchor:middle">MG1</text><text x="130" y="116.5" style="fill:var(--ink);font-size:6.5;text-anchor:middle">MG2</text>';
+  o+='<rect x="88" y="80" width="52" height="12" rx="3" style="fill:#fecaca;fill-opacity:.55;stroke:#ef4444;stroke-width:2"/><text x="114" y="89.5" style="fill:var(--ink);font-size:8;text-anchor:middle;font-weight:700">إنفرتر</text>';
+  var sc=soc<20?'#ef4444':soc<50?'#f59e0b':'#10b981';
+  o+='<rect x="206" y="92" width="64" height="28" rx="5" style="fill:var(--card);stroke:'+DC+';stroke-width:2.5"/><rect x="210" y="96" width="'+(56*soc/100)+'" height="20" rx="2" style="fill:'+sc+';opacity:.75"/><text x="238" y="110" style="fill:var(--ink);font-size:9;text-anchor:middle;font-weight:700">'+Math.round(soc)+'%</text><text x="238" y="132" style="fill:var(--ink);font-size:8;text-anchor:middle">بطارية HV</text>';
+  o+='<rect x="174" y="98" width="26" height="20" rx="4" style="fill:var(--card);stroke:'+DC+';stroke-width:2"/><text x="187" y="111" style="fill:var(--ink);font-size:7.5;text-anchor:middle">12V</text><path d="M206 108H200" style="stroke:'+OR+';stroke-width:3"/>';
+  var cab=function(d){return '<path d="'+d+'" style="fill:none;stroke:'+OR+';stroke-opacity:.45;stroke-width:3"/>'};
+  o+=cab('M140 86H238V92')+cab('M102 92V104')+cab('M130 92V104');
+  o+=m==='ck'?flw([[60,110],[86,110]],Pc*eg,ME,true,null):flw([[60,110],[86,110]],Pe,ME,false,null);
+  o+=isReg?flw([[116,128],[116,150],[74,150]],Pr,RG,true,[100,145]):flw([[116,128],[116,150],[74,150]],Pew+Pm,Pew>=Pm?ME:AC,false,[100,145]);
+  o+=m==='ck'?flw([[102,92],[102,104]],Pc,AC,false,null):flw([[102,92],[102,104]],ge,AC,true,null);
+  o+=isReg?flw([[130,92],[130,104]],re,RG,true,null):flw([[130,92],[130,104]],me,AC,false,null);
+  o+=chg>0.05?flw([[140,86],[238,86],[238,92]],chg,isReg?RG:DC,false,[190,80]):flw([[140,86],[238,86],[238,92]],dis,DC,true,[190,80]);
+  var cap=HBN[m],eng=engOn?'🟢 يشتغل':'⚫ مطفأ',ev=(Pe<0.05&&(Pm>0.1||isReg)&&m!=='ck')?'  ⚡ EV':'';
+  o+='<text x="150" y="16" style="fill:var(--ink);font-size:12;font-weight:800;text-anchor:middle">'+cap+'</text><text x="8" y="36" style="fill:var(--ink);font-size:10">المحرك: '+eng+ev+'</text><text x="292" y="36" style="fill:var(--ink);font-size:10;text-anchor:end">'+Math.round(v)+' كم/س'+(rev?' ⏪':'')+'</text>';
+  var val=isReg?-Math.min(1,Pr/Mm):Math.min(1,(Pew+Pm)/(Em+Mm))-(chg>0.05&&!isReg?Math.min(1,chg/30)*0.4:0),nx=150+130*Math.max(-1,Math.min(1,val));
+  o+='<rect x="20" y="186" width="80" height="9" rx="3" style="fill:#10b981;opacity:.75"/><rect x="100" y="186" width="100" height="9" style="fill:#3b82f6;opacity:.75"/><rect x="200" y="186" width="80" height="9" rx="3" style="fill:#ef4444;opacity:.75"/><polygon points="'+nx+',183 '+(nx-5)+',176 '+(nx+5)+',176" style="fill:var(--ink)"/><g style="fill:var(--mute);font-size:8.5;text-anchor:middle"><text x="60" y="208">شحن</text><text x="150" y="208">اقتصادي</text><text x="240" y="208">قدرة</text></g>';
+  o+='<g style="fill:var(--ink);font-size:9.5;text-anchor:middle;font-weight:700"><text x="50" y="226">🛢 '+num(Pe)+' kW</text><text x="150" y="226">⚡ '+num(isReg?Pr:Pm)+' kW</text><text x="250" y="226">🔋 '+(chg>0.05?'+'+num(chg):'-'+num(net))+' kW</text></g>';
+  $('hbSvg').innerHTML=o;
+  var short=dem-(Pew+Pm)>0.5&&!isReg&&m!=='ck'&&m!=='rd'&&m!=='ch'&&m!=='cd';
+  $('hbOut').innerHTML=note+'<b>'+cap+':</b> '+HBT[m]+'<br><br>محرك البنزين = <b>'+num(Pe)+'</b> kW'+(Pe>0?' (استهلاك تقريبي <b>'+num(fuel)+'</b> لتر/ساعة)':'')+'<br>المحرك الكهربائي = <b>'+num(isReg?Pr:Pm)+'</b> kW'+(isReg?(fric>0.5?' (والباقي <b>'+num(fric)+'</b> kW بالفرامل العادية)':''):'')+(m==='ck'?'<br>قدرة التشغيل بالمولّد = <b>'+num(Pc)+'</b> kW لثواني قليلة':'')+'<br>البطارية: '+(chg>0.05?'عم تتشحن <b>'+num(chg)+'</b> kW':net>0.05?'عم تفرغ <b>'+num(net)+'</b> kW':'ثابتة')+' (تغيّر الشحن <b>'+num(dsoc)+'</b>% بالدقيقة)<br>حرارة ضائعة بالإنفرتر ≈ <b>'+num(loss)+'</b> kW'+(Pg>0&&Pm>0?'<br>💡 كهربا المولّد بتروح مباشرة للمحرك عبر الإنفرتر بدون ما تمر بالبطارية.':'')+(short?'<br>⚠️ القدرة المطلوبة أكبر من المتاح، السيارة ما رح توصل لهالتسارع.':'')+'<br><br>طاقة الحركة عند '+vv+' كم/س = <b>'+num(Ek)+'</b> واط ساعة، والمسترجع منها بالكبح تقريباً <b>'+num(Ek*0.7)+'</b> واط ساعة.<br><small>الإنفرتر هو المترجم بين البطارية (تيار مستمر DC) والمحركات (تيار متناوب AC ثلاثي الأطوار). بيتحكم بسرعة وعزم المحرك بتغيير التردد والجهد، وبيشتغل بالعكس (AC إلى DC) عند الشحن والكبح. القوانين: قدرة البطارية = قدرة المحرك ÷ (كفاءة المحرك × كفاءة الإنفرتر). طاقة الحركة = ½ × الكتلة × السرعة². الشحن والتفريغ محدودين (شحن 30 kW، تفريغ 45 kW). كل القيم تقريبية للتعلم.</small>';
+}
+function hbSoc(){
+  var tot=0,i;TRIP.forEach(function(q){tot+=q[1]*10});
+  var o='<path d="M26 90H290M26 90V14" style="stroke:var(--mute);fill:none"/><path d="M26 '+(90-80/100*76)+'H290M26 '+(90-30/100*76)+'H290" style="stroke:var(--line);stroke-dasharray:3 3"/><text x="22" y="30" style="fill:var(--mute);font-size:8.5;text-anchor:end">80%</text><text x="22" y="70" style="fill:var(--mute);font-size:8.5;text-anchor:end">30%</text>',cl={ev:'#3b82f6',eng:'#f59e0b',chg:'#10b981',reg:'#10b981'};
+  for(i=1;i<HBH.length;i++){var a=HBH[i-1],b=HBH[i];o+='<path d="M'+(26+(i-1)/tot*264)+' '+(90-a[0]/100*76)+'L'+(26+i/tot*264)+' '+(90-b[0]/100*76)+'" style="stroke:'+cl[b[1]]+';stroke-width:3;fill:none"/>'}
+  o+='<g style="font-size:8.5;fill:var(--ink)"><text x="30" y="104">🔵 كهرباء</text><text x="95" y="104">🟠 محرك</text><text x="155" y="104">🟢 شحن/استرجاع</text></g><text x="290" y="12" style="fill:var(--mute);font-size:8.5;text-anchor:end">مستوى شحن البطارية خلال الرحلة</text>';
+  $('hbSoc').innerHTML=o;
+}
+function hbStop(){if(tripTm){clearInterval(tripTm);tripTm=null;$('hbTrip').textContent='▶ رحلة تلقائية (كل الحالات بالتتابع)';$('hbPh').textContent=''}}
+function hbCase(m,keepSoc){var d=HBD[m];$('hbM').value=m;$('hbP').value=d[0];$('hbV').value=d[1];if(!keepSoc)$('hbS').value=d[2]}
+$('hbM').addEventListener('change',function(){hbStop();$('hbSoc').style.display='none';hbCase(this.value,false);hb()});
+['hbP','hbV','hbS','hbE','hbO','hbB','hbW'].forEach(function(i){$(i).addEventListener('input',function(){hbStop();hb()})});
+$('hbTrip').onclick=function(){
+  if(tripTm){hbStop();return}
+  this.textContent='⏸ إيقاف الرحلة';tripI=0;tripT=0;HBH=[];$('hbSoc').style.display='block';
+  hbCase(TRIP[0][0],false);
+  tripTm=setInterval(function(){
+    if(tripT>=TRIP[tripI][1]*10){tripI++;tripT=0;if(tripI>=TRIP.length){tripI=0;HBH=[]}hbCase(TRIP[tripI][0],true)}
+    var soc=Math.max(5,Math.min(100,g('hbS')+HB_last*0.5/60));
+    $('hbS').value=Math.round(soc*10)/10;
+    hb();HBH.push([soc,HB_kind]);hbSoc();tripT++;
+    $('hbPh').textContent='المرحلة '+(tripI+1)+' من '+TRIP.length+': '+HBN[TRIP[tripI][0]];
+  },100);
+};
+hb();
+/* دارة كهرباء السيارة */
+function cb(){
+  var on=$('cbS').value==='1',P=g('cbP'),n=g('cbN'),V=g('cbV');
+  if(bad([P,n,V])){$('cbOut').textContent='عبّي القيم بأرقام موجبة.';return}
+  var I=P*n/V,Ic=V/80,fz=[5,7.5,10,15,20,25,30,40,50],fr=fz.filter(function(x){return x>=I*1.25})[0]||'أكبر من 50',wi=I<=8?0.75:I<=12?1:I<=16?1.5:I<=22?2.5:I<=30?4:6,wc=on?'#ef4444':'var(--mute)',ln=function(d){return '<path d="'+d+'" style="stroke:'+wc+';stroke-width:3;fill:none"/>'},g0=function(x,y){return '<path d="M'+(x-9)+' '+y+'H'+(x+9)+'M'+(x-6)+' '+(y+5)+'H'+(x+6)+'M'+(x-3)+' '+(y+10)+'H'+(x+3)+'" style="stroke:var(--ink);stroke-width:2.5"/>'};
+  var o='<path d="M20 28V135" style="stroke:#ef4444;stroke-width:4"/><text x="8" y="20" style="fill:#ef4444;font-size:10.5;font-weight:700">+'+V+'V</text>';
+  o+=ln('M20 45H80M104 45H130M160 45H180M220 45H250V70')+'<rect x="80" y="39" width="24" height="12" rx="2" style="fill:var(--card);stroke:var(--ink);stroke-width:2"/><path d="M130 45L160 '+(on?45:30)+'" style="stroke:var(--ink);stroke-width:3"/><circle cx="130" cy="45" r="3" style="fill:var(--ink)"/><circle cx="160" cy="45" r="3" style="fill:var(--ink)"/><rect x="180" y="33" width="40" height="24" rx="4" style="fill:var(--card);stroke:var(--ink);stroke-width:2"/>'+g0(250,70);
+  o+=ln('M20 125H80M104 125H130M160 125H213M237 125H270V150')+'<rect x="80" y="119" width="24" height="12" rx="2" style="fill:var(--card);stroke:var(--ink);stroke-width:2"/><path d="M130 125L160 '+(on?125:110)+'" style="stroke:var(--ink);stroke-width:3"/><circle cx="130" cy="125" r="3" style="fill:var(--ink)"/><circle cx="160" cy="125" r="3" style="fill:var(--ink)"/><circle cx="225" cy="125" r="12" style="fill:'+(on?'#fde047':'var(--card)')+';stroke:var(--ink);stroke-width:2"/><path d="M217 117L233 133M233 117L217 133" style="stroke:var(--ink);stroke-width:1.5"/>'+g0(270,150);
+  if(on)o+='<path d="M200 57L146 112" style="stroke:#f59e0b;stroke-dasharray:4 3;stroke-width:2"/>';
+  o+='<g style="fill:var(--ink);font-size:9.5"><text x="24" y="98">دارة الحمل (تيار كبير)</text><text x="24" y="27" >دارة التحكم (تيار صغير)</text><text x="92" y="36" text-anchor="middle">فيوز 5A</text><text x="145" y="63" text-anchor="middle">مفتاح</text><text x="200" y="48" text-anchor="middle">ملف الريليه</text><text x="92" y="116" text-anchor="middle">فيوز '+fr+'A</text><text x="145" y="144" text-anchor="middle">تلامس الريليه</text><text x="225" y="148" text-anchor="middle">مصابيح</text></g>';
+  $('cbSvg').innerHTML=o;
+  $('cbOut').innerHTML='المفتاح: <b>'+(on?'مشغّل، الريليه اشتغل واللمبات منوّرة':'مطفأ، ما في تيار')+'</b><br>تيار الحمل (اللمبات) = <b>'+num(on?I:0)+'</b> أمبير<br>تيار ملف الريليه = <b>'+num(on?Ic:0)+'</b> أمبير فقط (بيحمي المفتاح)<br>الفيوز المناسب = <b>'+fr+'</b> أمبير (حوالي 125% من التيار)<br>مقطع السلك التقريبي = <b>'+wi+'</b> mm²<br><small>القوانين: القدرة P = V × I، فالتيار I = P ÷ V. الفيوز بيقطع قبل ما السلك يسخن ويحترق. الريليه بيخلي المفتاح الصغير يتحكم بتيار كبير. قيم مقاطع الأسلاك تقريبية، راجع جداول المصنّع.</small>';
+}
+['cbS','cbP','cbN','cbV'].forEach(function(i){$(i).addEventListener('input',cb);$(i).addEventListener('change',cb)});
+cb();
+/* حساسات */
+var SNS=[
+ {l:'الحرارة (°C)',min:-20,max:120,st:1,val:90,u:'فولت',f:function(x){var T=x+273.15,R=2500*Math.exp(3500*(1/T-1/298.15));return {y:5*R/(R+2200),t:'مقاومة الحساس = <b>'+num(R)+'</b> أوم'}},law:'R = R25 × e^(B × (1/T − 1/T25)) ثم Vout = 5 × R ÷ (R + Rثابتة)، أي مقسم جهد مع مقاومة ثابتة بالـ ECU.',use:'الـ ECU بيحوّل الجهد لحرارة، وبيزيد الوقود لما المحرك بارد، وبيشغّل مروحة الرادياتير لما يسخن.'},
+ {l:'زاوية الخانق (°)',min:0,max:90,st:1,val:30,u:'فولت',f:function(x){return {y:0.5+4*x/90,t:'فتحة الخانق = <b>'+num(x/90*100)+'</b>%'}},law:'Vout = 0.5 + 4 × (الزاوية ÷ 90). مقاومة متغيرة (بوتنشيومتر) بتتحرك مع الدواسة.',use:'بيقول للـ ECU كم السائق عم يضغط على الدواسة، فبيقرر كمية الوقود والتبديل بالأوتوماتيك.'},
+ {l:'لامدا λ',min:0.85,max:1.15,st:0.005,val:1,u:'فولت',f:function(x){return {y:0.1+0.8/(1+Math.exp(60*(x-1))),t:x<0.99?'الخليط <b>غني</b> (وقود زيادة)':x>1.01?'الخليط <b>فقير</b> (هوا زيادة)':'الخليط <b>مثالي</b> (λ=1)'}},law:'λ = (هوا/وقود فعلي) ÷ (هوا/وقود مثالي 14.7). الحساس بيعطي قفزة جهد حادة حوالي λ=1.',use:'الـ ECU بيعدّل كمية الوقود باستمرار ليبقي الخليط حوالي λ=1 عشان الكتالايزر يشتغل صح.'},
+ {l:'الضغط (kPa)',min:20,max:250,st:1,val:101,u:'فولت',f:function(x){return {y:0.5+(x-20)/230*4,t:x<95?'<b>فراغ</b> بالمنفّذ (المحرك بدون حمل)':x>110?'<b>ضغط تيربو</b> بالمنفّذ':'قريب من الضغط الجوي'}},law:'Vout = 0.5 + 4 × (P − 20) ÷ 230 (حساس يعطي جهد خطي مع الضغط).',use:'بيقيس حمل المحرك. كل ما زاد الضغط دخل هوا أكتر، فالـ ECU بيزيد الوقود.'},
+ {l:'دورات المحرك (RPM)',min:0,max:7000,st:100,val:3000,u:'هرتز',f:function(x){return {y:x/60*58,t:'زمن السن الواحد = <b>'+(x>0?num(1000/(x/60*58)):'-')+'</b> ملي ثانية'}},law:'التردد = (RPM ÷ 60) × 58 سن (عجلة 60-2: 60 سن ناقص 2 = فجوة).',use:'الفجوة بتمر مرة كل دورة، فالـ ECU بيعرف أعلى نقطة للكباس بالضبط وبيحدد وقت الشرارة والبخاخ.'}];
+function sn(){
+  var s=SNS[+$('snT').value],x=+$('snV').value,N=80,ys=[],i;
+  $('snVv').textContent=x;$('snL').textContent=s.l;
+  for(i=0;i<=N;i++)ys.push(s.f(s.min+(s.max-s.min)*i/N).y);
+  var y0=Math.min.apply(null,ys),y1=Math.max.apply(null,ys),rg=(y1-y0)||1,cu=s.f(x),cx=40+(x-s.min)/(s.max-s.min)*240,cy=150-(cu.y-y0)/rg*120;
+  $('snSvg').innerHTML='<path d="M40 150H285M40 150V20" style="stroke:var(--mute);fill:none"/><path d="'+ys.map(function(y,j){return (j?'L':'M')+(40+j/N*240)+' '+(150-(y-y0)/rg*120)}).join('')+'" style="'+ZS+'"/><path d="M'+cx+' 150V'+cy+'M40 '+cy+'H'+cx+'" style="stroke:#ef4444;stroke-dasharray:3 3"/><circle cx="'+cx+'" cy="'+cy+'" r="5" style="fill:#ef4444"/><text x="40" y="166" style="fill:var(--mute);font-size:9.5">'+s.min+'</text><text x="285" y="166" style="fill:var(--mute);font-size:9.5;text-anchor:end">'+s.max+'</text><text x="36" y="26" style="fill:var(--mute);font-size:9.5;text-anchor:end">'+num(y1)+'</text><text x="36" y="150" style="fill:var(--mute);font-size:9.5;text-anchor:end">'+num(y0)+'</text><text x="150" y="182" style="fill:var(--mute);font-size:10;text-anchor:middle">'+s.l+' ← الإشارة ('+s.u+')</text>';
+  $('snOut').innerHTML='الإشارة الحالية = <b>'+num(cu.y)+'</b> '+s.u+'<br>'+cu.t+'<br><br><b>القانون:</b> '+s.law+'<br><b>الفايدة:</b> '+s.use;
+}
+$('snT').addEventListener('change',function(){var s=SNS[+this.value],r=$('snV');r.min=s.min;r.max=s.max;r.step=s.st;r.value=s.val;sn()});
+$('snV').addEventListener('input',sn);
+(function(){var s=SNS[0],r=$('snV');r.min=s.min;r.max=s.max;r.step=s.st;r.value=s.val})();
+sn();
+/* تشريح المحرك */
+var ANP={spark:['شمعة الإشعال','بتطلّع شرارة كهربائية بنهاية شوط الضغط لتشعل الخليط. بتشتغل بجهد عالي (آلاف الفولتات) من بوبينة الإشعال.'],iv:['صمام السحب','بيفتح لدخول الهوا والبنزين لما الكباس ينزل بشوط السحب.'],ev:['صمام العادم','بيفتح لخروج غازات الاحتراق لما الكباس يطلع بشوط العادم.'],cam:['عمود الكامات','كل كامة بتدفع صمام لتفتحه، وزنبرك بيسكّره. بيلف بنص سرعة الكرنك.'],head:['رأس الأسطوانة','بيسكّر الأسطوانة من فوق، وفيه الصمامات والشمعة وممرات الماء.'],piston:['الكباس','بيتحرك طلوع ونزول، وبياخد قوة الاحتراق وبينقلها للكرنك.'],rings:['الحلقات (الشنابر)','بتسد الفراغ بين الكباس والأسطوانة، وبتمنع تسرب الغاز، وبتكشط الزيت الزايد.'],rod:['ذراع التوصيل','بيربط الكباس بعمود الكرنك وبينقل القوة بينهم.'],crank:['عمود الكرنك','بيحوّل حركة الكباس (طلوع ونزول) لدوران، ومنه بتطلع قدرة المحرك للعجلات.'],block:['كتلة الأسطوانات','الهيكل الرئيسي للمحرك: فيه الأسطوانات ومجاري الماء والزيت.'],water:['مجاري ماء التبريد','ماء بيمر حوالين الأسطوانة بياخد الحرارة ويوديها للرادياتير.'],pan:['كارتير الزيت','بيجمع الزيت، ومنه بتسحبه مضخة الزيت لتزييت المحامل والكباس.']};
+(function(){
+  var P=function(k,c){return '<g class="ap" data-p="'+k+'">'+c+'</g>'};
+  var o='';
+  o+=P('water','<rect x="76" y="92" width="14" height="100" style="fill:#60a5fa;opacity:.7"/><rect x="190" y="92" width="14" height="100" style="fill:#60a5fa;opacity:.7"/>');
+  o+=P('block','<path d="M76 92V200H204V92" style="fill:none;stroke:var(--ink);stroke-width:3"/><path d="M90 92V200M190 92V200" style="stroke:var(--ink);stroke-width:2"/><rect x="76" y="92" width="4" height="108" style="fill:var(--line)"/>');
+  o+=P('head','<rect x="76" y="52" width="128" height="40" rx="4" style="fill:var(--line);stroke:var(--ink);stroke-width:2.5"/>');
+  o+=P('spark','<rect x="136" y="26" width="8" height="30" style="fill:var(--mute)"/><rect x="139" y="56" width="2" height="14" style="fill:#fde047"/>');
+  o+=P('iv','<rect x="108" y="22" width="4" height="52" style="fill:#3b82f6"/><rect x="98" y="74" width="24" height="5" style="fill:#3b82f6"/>');
+  o+=P('ev','<rect x="168" y="22" width="4" height="52" style="fill:#f59e0b"/><rect x="158" y="74" width="24" height="5" style="fill:#f59e0b"/>');
+  o+=P('cam','<circle cx="110" cy="14" r="9" style="fill:var(--card);stroke:var(--ink);stroke-width:2"/><ellipse cx="110" cy="18" rx="4" ry="9" style="fill:var(--ink);opacity:.7"/><circle cx="170" cy="14" r="9" style="fill:var(--card);stroke:var(--ink);stroke-width:2"/><ellipse cx="170" cy="18" rx="4" ry="9" style="fill:var(--ink);opacity:.7"/>');
+  o+=P('piston','<rect x="94" y="120" width="92" height="38" rx="4" style="fill:var(--acc);opacity:.9"/>');
+  o+=P('rings','<path d="M94 126H186M94 132H186M94 138H186" style="stroke:var(--ink);stroke-width:2.5"/>');
+  o+=P('rod','<path d="M140 156L140 226" style="stroke:var(--ink);stroke-width:7;stroke-linecap:round"/><circle cx="140" cy="156" r="5" style="fill:var(--card);stroke:var(--ink);stroke-width:2"/>');
+  o+=P('crank','<circle cx="140" cy="242" r="20" style="fill:none;stroke:var(--mute);stroke-dasharray:3 3"/><circle cx="140" cy="226" r="7" style="fill:var(--ink)"/><circle cx="140" cy="242" r="7" style="fill:var(--ink)"/><circle cx="140" cy="262" r="12" style="fill:var(--mute)"/>');
+  o+=P('pan','<path d="M76 268Q140 296 204 268" style="fill:none;stroke:var(--ink);stroke-width:3"/>');
+  o+='<g style="fill:var(--ink);font-size:9.5"><text x="215" y="30">شمعة</text><text x="215" y="76">رأس</text><text x="215" y="140">كباس</text><text x="215" y="200">كتلة</text><text x="215" y="246">كرنك</text><text x="215" y="282">كارتير</text></g>';
+  $('anSvg').innerHTML=o;
+  $('anSvg').addEventListener('click',function(e){
+    var t=e.target;while(t&&t!==this&&!(t.getAttribute&&t.getAttribute('data-p')))t=t.parentNode;
+    if(!t||t===this)return;
+    [].forEach.call(this.querySelectorAll('.ap'),function(x){x.classList.remove('sel')});
+    t.classList.add('sel');
+    var d=ANP[t.getAttribute('data-p')];
+    $('anOut').innerHTML='<b>'+d[0]+'</b><br>'+d[1];
+  });
+})();
+/* كفاءة الوقود */
+$('ftGo').onclick=function(){
+  var P=g('ftP'),F=g('ftF'),Sp=g('ftS'),fl=$('ftT').value.split(',').map(Number);
+  if(bad([P,F,Sp])){$('ftOut').textContent='عبّي القيم بأرقام موجبة.';return}
+  var m=F*fl[0]/3600,Pf=m*fl[1]*1000,eta=P/Pf,bs=m*3600*1000/P,lo=1-eta,seg=[[eta,'#10b981','شغل مفيد'],[lo*0.4,'#3b82f6','تبريد'],[lo*0.45,'#f59e0b','عادم'],[lo*0.15,'#9ca3af','احتكاك']],x=20,o='';
+  if(eta>1){$('ftOut').textContent='الأرقام غير منطقية (الكفاءة أكبر من 100%). تأكد من القدرة والاستهلاك.';return}
+  seg.forEach(function(q){var w=q[0]*260;o+='<rect x="'+x+'" y="30" width="'+w+'" height="30" style="fill:'+q[1]+'"/>'+(w>40?'<text x="'+(x+w/2)+'" y="49" style="fill:#fff;font-size:10;text-anchor:middle;font-weight:700">'+Math.round(q[0]*100)+'%</text>':'');x+=w});
+  o+='<g style="font-size:10"><circle cx="30" cy="85" r="5" style="fill:#10b981"/><text x="40" y="89" style="fill:var(--ink)">شغل مفيد</text><circle cx="100" cy="85" r="5" style="fill:#3b82f6"/><text x="110" y="89" style="fill:var(--ink)">تبريد</text><circle cx="160" cy="85" r="5" style="fill:#f59e0b"/><text x="170" y="89" style="fill:var(--ink)">عادم</text><circle cx="220" cy="85" r="5" style="fill:#9ca3af"/><text x="230" y="89" style="fill:var(--ink)">احتكاك</text></g><text x="150" y="20" style="fill:var(--mute);font-size:10;text-anchor:middle">وين بتروح طاقة الوقود (توزيع تقريبي للخسائر)</text>';
+  $('ftSvg').innerHTML=o;
+  $('ftOut').innerHTML='قدرة الوقود الداخلة = <b>'+num(Pf)+'</b> كيلوواط<br>الكفاءة الحرارية η = <b>'+num(eta*100)+'</b>%<br>الاستهلاك النوعي BSFC = <b>'+num(bs)+'</b> غرام/كيلوواط ساعة<br>الاستهلاك = <b>'+num(F/Sp*100)+'</b> لتر لكل 100 كم<br><small>القانون: η = القدرة المفيدة ÷ (تدفق الوقود × القيمة الحرارية). BSFC = تدفق الوقود ÷ القدرة. افتراض: بنزين 0.745 كغ/لتر و43.5 ميغاجول/كغ، ديزل 0.832 و42.8. محرك البنزين غالباً بين 25% و35%.</small>';
+};
+$('ftGo').onclick();
+/* قدرة السير على الطريق */
+$('rlGo').onclick=function(){
+  var m=g('rlM'),C=g('rlC'),R=g('rlR'),V=g('rlV'),G=g('rlG'),E=g('rlE');
+  if(bad([m,C,R,V,E])||isNaN(G)||E>100){$('rlOut').textContent='تأكد من القيم.';return}
+  var u=V/3.6,an=Math.atan(G/100),Fa=0.5*1.2*C*u*u,Fr=R*m*9.81*Math.cos(an),Fg=m*9.81*Math.sin(an),F=Fa+Fr+Fg,Pw=F*u/1000,tot=Fa+Fr+Math.max(0,Fg),x=20,o='';
+  [[Fa,'#3b82f6','هوا'],[Fr,'#f59e0b','إطارات'],[Math.max(0,Fg),'#ef4444','طلعة']].forEach(function(q){var w=q[0]/tot*260;if(w>0){o+='<rect x="'+x+'" y="30" width="'+w+'" height="30" style="fill:'+q[1]+'"/>'+(w>38?'<text x="'+(x+w/2)+'" y="49" style="fill:#fff;font-size:10;text-anchor:middle;font-weight:700">'+q[2]+'</text>':'');x+=w}});
+  o+='<text x="150" y="20" style="fill:var(--mute);font-size:10;text-anchor:middle">القوى اللي بتقاوم الحركة (المجموع '+num(F)+' نيوتن)</text><text x="150" y="85" style="fill:var(--ink);font-size:10;text-anchor:middle">هوا '+num(Fa)+' N  |  إطارات '+num(Fr)+' N  |  طلعة '+num(Fg)+' N</text>';
+  $('rlSvg').innerHTML=o;
+  $('rlOut').innerHTML='القدرة عند العجلات = <b>'+num(Pw)+'</b> كيلوواط'+(Pw<0?' (سالبة: السيارة بتتسارع لحالها على النزلة)':'')+'<br>قدرة المحرك المطلوبة = <b>'+num(Math.max(0,Pw)/(E/100))+'</b> كيلوواط = <b>'+num(Math.max(0,Pw)/(E/100)/0.7457)+'</b> حصان<br>لو ضاعفت السرعة، قوة الهوا بتصير 4 أضعاف وقدرة الهوا 8 أضعاف.<br><small>القوانين: قوة الهوا = ½ × كثافة الهوا × CdA × v². مقاومة الدحرجة = Crr × m × g. قوة الطلعة = m × g × sin(الزاوية). القدرة = القوة × السرعة. افتراض كثافة الهوا 1.2 كغ/م³.</small>';
+};
+$('rlGo').onclick();
+var N3={t53:'شوف الكباس والصمامات والشرارة وهي عم تشتغل. الدورة الكاملة 720°: سحب، ضغط، احتراق، عادم.',t54:'بالهايبرد الإنفرتر هو القلب: بيحوّل كهربا البطارية (DC) لكهربا المحركات (AC) والعكس. اختار الحالة، أو شغّل الرحلة التلقائية.',t55:'مفتاح صغير بيشغّل الريليه (مفتاح كهربائي)، والريليه بيشغّل تيار كبير للمصابيح بأمان.',t56:'الحساسات بتحوّل الحرارة والضغط والسرعة لجهد كهربائي يفهمه كمبيوتر السيارة.',t57:'كم من طاقة الوقود بتتحول لشغل فعلي، وكم بتضيع حرارة.',t58:'ليش بتصرف السيارة وقود أكتر بالسرعة العالية؟ لأنه مقاومة الهوا بتزيد بشكل كبير.',t59:'قسم المحرك بالرسمة، واضغط على كل قطعة لتعرف شو بتعمل.'};
+Object.keys(N3).forEach(function(id){var sc=$(id);if(!sc)return;var d=document.createElement('div');d.className='say';d.innerHTML='💡 '+N3[id];var p=sc.querySelector('.sub');if(p)p.parentNode.insertBefore(d,p.nextSibling)});
+CAT.forEach(function(c){if(c[0]==='محرك')c[1].push('t57');if(c[0]==='مركبة')c[1].push('t58')});
+CAT.unshift(['محاكاة',['t53','t54','t59','t55','t56']]);
 $('cats').innerHTML='';
 CAT.forEach(function(c,i){var b=document.createElement('button');b.textContent=c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
 setCat(0);
