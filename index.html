@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>صندوق أدوات المهندس</title>
+<title>صندوق أدوات المهندس | محمد فواز أبو عامر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#f4f5f9;--card:#fff;--ink:#1f2430;--mute:#6b7280;--line:#dfe2ea;--acc:#6d5ae6}
-@media(prefers-color-scheme:dark){:root{--bg:#14161c;--card:#1d2029;--ink:#eceef3;--mute:#9aa1b0;--line:#2c303c;--acc:#a78bfa}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,Arial,sans-serif}
 main{max-width:620px;margin:0 auto;padding:20px 14px 40px}
@@ -50,13 +51,53 @@ svg{direction:ltr}
 .whl{transform-box:fill-box;transform-origin:center;animation:spin 1s linear infinite}
 .road{fill:none;stroke:var(--mute);stroke-width:3;stroke-dasharray:14 12;animation:flow .6s linear infinite}
 .road.rv{animation-direction:reverse}
+
+:root{--bg:#070b19;--card:#0f1730;--ink:#e6ebf7;--mute:#8b96b3;--line:#222c4a;--acc:#22d3ee;color-scheme:dark}
+body{font-family:'Cairo','Segoe UI',Tahoma,system-ui,sans-serif;font-size:16px;line-height:1.65;background:radial-gradient(1100px 560px at 85% -10%,#142457 0,transparent 60%),radial-gradient(800px 480px at 0% 8%,#0c3040 0,transparent 55%),#070b19;background-attachment:fixed}
+body:before{content:"";position:fixed;inset:0;background-image:linear-gradient(#ffffff07 1px,transparent 1px),linear-gradient(90deg,#ffffff07 1px,transparent 1px);background-size:38px 38px;pointer-events:none;z-index:0}
+main{position:relative;z-index:1;max-width:780px;padding:18px 14px 44px}
+.hero{position:relative;overflow:hidden;border-radius:26px;padding:28px 22px 22px;margin-bottom:18px;background:linear-gradient(135deg,#0b1a40 0%,#0d2a55 48%,#0a3d4c 100%);border:1px solid #2b3f7d;box-shadow:0 30px 70px -30px #000,inset 0 1px 0 #ffffff1a}
+.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(420px 220px at 92% 0,#22d3ee30,transparent 70%);pointer-events:none}
+.hero>*:not(.hero-gears){position:relative;z-index:1}
+.hero-gears{position:absolute;left:-46px;bottom:-60px;width:270px;height:270px;opacity:.38;z-index:0}
+.gspin{animation:spin 18s linear infinite}.gspin2{animation:spin 12s linear infinite reverse}
+.eyebrow{display:inline-block;font-size:.8rem;letter-spacing:.4px;color:#7dd3fc;border:1px solid #38bdf855;background:#0ea5e91a;padding:3px 12px;border-radius:99px;margin-bottom:10px}
+.owner{padding:0;margin:0 0 4px;background:none;box-shadow:none;border-radius:0;text-align:right;font-size:2.15rem;font-weight:800;line-height:1.3;letter-spacing:0;color:transparent;background-image:linear-gradient(90deg,#fff 0%,#a5f3fc 55%,#c4b5fd 100%);-webkit-background-clip:text;background-clip:text}
+.hero h1{font-size:1.15rem;font-weight:700;color:#cfe0ff;-webkit-text-fill-color:#cfe0ff;background:none;margin:0 0 6px}
+.hero .sub{color:#9fb2d8;margin:0;max-width:30em;font-size:.95rem}
+.stats{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}.stats span{background:#ffffff12;border:1px solid #ffffff22;border-radius:99px;padding:3px 12px;font-size:.82rem;color:#dbe7ff}.stats b{color:#67e8f9}
+.cats{gap:10px;margin-bottom:12px}
+.cats button{padding:11px 4px;border-radius:16px;border:1px solid #223058;background:linear-gradient(180deg,#121b38,#0d1429);color:#cfd8f0;font-weight:700;font-size:.95rem;flex:1 0 22%;transition:.15s}
+.cats button:hover{border-color:#22d3ee88;transform:translateY(-1px)}
+.cats button.on{background:linear-gradient(135deg,#06b6d4,#6366f1);color:#fff;border-color:transparent;box-shadow:0 10px 26px -10px #22d3ee99}
+.tabs{gap:8px;margin-bottom:14px}
+.tabs button{padding:9px 6px;border-radius:14px;border:1px solid #223058;background:#0d1429;color:#c3cde8;font-size:.9rem;transition:.15s}
+.tabs button:hover{border-color:#22d3ee77;color:#fff}
+.tabs button.on{background:#e6ebf7;color:#0a1124;border-color:#e6ebf7;font-weight:700}
+.card{background:linear-gradient(180deg,#111a38,#0b1226);border:1px solid #223058;border-radius:22px;padding:20px;box-shadow:0 26px 60px -28px #000,inset 0 1px 0 #ffffff12}
+input,select{background:#0a1124;border:1px solid #243262;color:#e6ebf7;border-radius:12px}
+input:focus,select:focus{outline:2px solid #22d3ee88;outline-offset:1px;border-color:#22d3ee}
+.btn{background:linear-gradient(135deg,#06b6d4,#6366f1);font-weight:700;border-radius:14px;box-shadow:0 12px 28px -12px #22d3ee99;transition:.15s}
+.btn:hover{filter:brightness(1.1);transform:translateY(-1px)}
+.out{background:#0a1124;border:1px solid #223058;border-radius:14px}
+.say{background:#0a1124;border-right:4px solid #22d3ee;border-radius:12px;color:#cfd8f0}
+.sub{color:#9aa8cc}
+.dg{filter:drop-shadow(0 14px 24px #00000066)}
+.hs{pointer-events:all;cursor:pointer}.hs:hover{fill:rgba(34,211,238,.20)}.hs.sel{fill:rgba(34,211,238,.28);stroke:#22d3ee;stroke-width:1.6}
+footer{color:#8b96b3;font-size:.95rem;font-weight:700;padding-top:6px}
+@media(max-width:520px){.owner{font-size:1.7rem}.hero{padding:22px 16px 18px}}
 </style>
 </head>
 <body>
 <main>
-<div class="owner">المهندس محمد فواز أبو عامر</div>
-<h1>⚙️ صندوق أدوات المهندس</h1>
-<p class="sub">مختبر هندسة ميكانيكية بالعربي: محركات ومركبات وميكانيكا وكهرباء. اختار القسم ثم الأداة.</p>
+<header class="hero">
+  <svg class="hero-gears" id="heroGears" viewBox="0 0 270 270"></svg>
+  <div class="eyebrow">مختبر هندسة المركبات والمحركات</div>
+  <div class="owner">المهندس محمد فواز أبو عامر</div>
+  <h1>صندوق أدوات المهندس</h1>
+  <p class="sub">حاسبات ومحاكاة ورسومات هندسية تفاعلية بمقياس حقيقي: محركات، هايبرد، أوتوماتيك، كهرباء، حرارة وموائع.</p>
+  <div class="stats"><span><b>59</b> أداة</span><span><b>15</b> حالة هايبرد</span><span><b>محاكاة</b> حيّة للمحرك</span><span><b>تشريح</b> تفاعلي</span></div>
+</header>
 
 <div class="cats" id="cats"></div>
 <div class="tabs">
@@ -694,7 +735,7 @@ svg{direction:ltr}
   <label>زاوية الكرنك: <b id="fsAv">0</b>° من 720</label>
   <input id="fsA" type="range" min="0" max="720" value="0">
   <button class="btn" id="fsPlay">▶ تشغيل</button>
-  <svg id="fsSvg" class="dg" viewBox="0 0 300 340"></svg>
+  <svg id="fsSvg" class="dg" viewBox="0 0 400 550" style="max-width:520px"></svg>
   <div class="out" id="fsOut"></div>
 </section>
 
@@ -705,7 +746,7 @@ svg{direction:ltr}
   <div class="g"><div><label>القدرة المطلوبة عند العجلات (kW)</label><input id="hbP" type="number" step="any" value="15"></div><div><label>سرعة السيارة (كم/س)</label><input id="hbV" type="number" step="any" value="10"></div><div><label>شحن البطارية SOC (%)</label><input id="hbS" type="number" step="any" value="60"></div><div><label>قدرة محرك البنزين (kW)</label><input id="hbE" type="number" step="any" value="70"></div><div><label>قدرة المحرك الكهربائي (kW)</label><input id="hbO" type="number" step="any" value="50"></div><div><label>سعة البطارية (kWh)</label><input id="hbB" type="number" step="any" value="1.3"></div><div><label>كتلة السيارة (kg)</label><input id="hbW" type="number" step="any" value="1400"></div></div>
   <button class="btn" id="hbTrip">▶ رحلة تلقائية (كل الحالات بالتتابع)</button>
   <div id="hbPh" style="margin-top:8px;font-weight:700"></div>
-  <svg id="hbSvg" class="dg" viewBox="0 0 300 235"></svg>
+  <svg id="hbSvg" class="dg" viewBox="0 0 300 255" style="max-width:600px"></svg>
   <svg id="hbSoc" class="dg" viewBox="0 0 300 110" style="display:none"></svg>
   <div class="out" id="hbOut"></div>
 </section>
@@ -731,7 +772,7 @@ svg{direction:ltr}
 
 <section class="card" id="t59">
   <p class="sub">مقطع بالمحرك: اضغط على أي قطعة بالرسمة وشوف شو وظيفتها.</p>
-  <svg id="anSvg" class="dg" viewBox="0 0 300 290"></svg>
+  <svg id="anSvg" class="dg" viewBox="0 0 400 460" style="max-width:520px"></svg>
   <div class="out" id="anOut">👆 اضغط على قطعة (الكباس، الصمام، الشمعة، الكرنك...)</div>
 </section>
 
@@ -991,7 +1032,7 @@ function setCat(i){
   ids.forEach(function(id){var b=tabsBox.querySelector('[data-t="'+id+'"]');tabsBox.appendChild(b)});
   tabsBox.querySelector('[data-t="'+ids[0]+'"]').click();
 }
-CAT.forEach(function(c,i){var b=document.createElement('button');b.textContent=c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
+CAT.forEach(function(c,i){var b=document.createElement('button');b.innerHTML=(typeof CATI!=='undefined'&&CATI[c[0]]?CATI[c[0]]+' ':'')+c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
 setCat(0);
 
 /* انحناء جسر */
@@ -1089,7 +1130,7 @@ drawGears(20,60);requestAnimationFrame(gearLoop);
 /* تحديث الأقسام */
 CAT[0][1].push('t21');CAT[1][1].push('t19','t20');
 $('cats').innerHTML='';
-CAT.forEach(function(c,i){var b=document.createElement('button');b.textContent=c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
+CAT.forEach(function(c,i){var b=document.createElement('button');b.innerHTML=(typeof CATI!=='undefined'&&CATI[c[0]]?CATI[c[0]]+' ':'')+c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
 setCat(0);
 
 /* تصميم الكباس */
@@ -1145,7 +1186,7 @@ $('fwGo').onclick();
 /* تحديث الأقسام */
 CAT[0][1].push('t22','t23','t24','t25');
 $('cats').innerHTML='';
-CAT.forEach(function(c,i){var b=document.createElement('button');b.textContent=c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
+CAT.forEach(function(c,i){var b=document.createElement('button');b.innerHTML=(typeof CATI!=='undefined'&&CATI[c[0]]?CATI[c[0]]+' ':'')+c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
 setCat(0);
 
 /* بروفايل الكامة */
@@ -1248,7 +1289,7 @@ CAT[0][1].push('t26','t27','t33');
 CAT[1][1].push('t28','t29','t30','t34');
 CAT.splice(3,0,['حرارة وموائع',['t31','t32','t10','t11','t12']]);
 $('cats').innerHTML='';
-CAT.forEach(function(c,i){var b=document.createElement('button');b.textContent=c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
+CAT.forEach(function(c,i){var b=document.createElement('button');b.innerHTML=(typeof CATI!=='undefined'&&CATI[c[0]]?CATI[c[0]]+' ':'')+c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
 setCat(0);
 
 /* ===== أدوات جديدة ===== */
@@ -1411,7 +1452,7 @@ CAT[0][1].push('t42','t43','t44','t45');
 CAT[2][1]=['t46','t47','t17','t18'];
 CAT[4][1]=['t1','t35','t36','t37','t38','t39','t40','t41','t3','t2'];
 $('cats').innerHTML='';
-CAT.forEach(function(c,i){var b=document.createElement('button');b.textContent=c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
+CAT.forEach(function(c,i){var b=document.createElement('button');b.innerHTML=(typeof CATI!=='undefined'&&CATI[c[0]]?CATI[c[0]]+' ':'')+c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
 setCat(0);
 
 /* ===== الدفرنس والأوتوماتيك والإطارات ===== */
@@ -1468,8 +1509,147 @@ Object.keys(N2).forEach(function(id){var sc=$(id);if(!sc)return;var d=document.c
 CAT[2][1]=['t46','t47','t48','t52','t17','t18'];
 CAT.splice(3,0,['أوتوماتيك',['t51','t49','t50']]);
 $('cats').innerHTML='';
-CAT.forEach(function(c,i){var b=document.createElement('button');b.textContent=c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
+CAT.forEach(function(c,i){var b=document.createElement('button');b.innerHTML=(typeof CATI!=='undefined'&&CATI[c[0]]?CATI[c[0]]+' ':'')+c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
 setCat(0);
+
+var CATI={'محاكاة':'🎛️','محرك':'⚙️','ميكانيكا':'🛠️','مركبة':'🚗','أوتوماتيك':'🔁','حرارة وموائع':'🌡️','كهرباء وتحويل':'⚡'};
+/* ===== رسم المحرك (مقطع هندسي) ===== */
+function lgd(id,x2,y2,st){return '<linearGradient id="'+id+'" x1="0" y1="0" x2="'+x2+'" y2="'+y2+'">'+st.map(function(s){return '<stop offset="'+s[0]+'" stop-color="'+s[1]+'"'+(s[2]!=null?' stop-opacity="'+s[2]+'"':'')+'/>'}).join('')+'</linearGradient>'}
+function rgd(id,st){return '<radialGradient id="'+id+'" cx="0.5" cy="0.5" r="0.5">'+st.map(function(s){return '<stop offset="'+s[0]+'" stop-color="'+s[1]+'"'+(s[2]!=null?' stop-opacity="'+s[2]+'"':'')+'/>'}).join('')+'</radialGradient>'}
+function flowp(d,col,w,hx,hy,ang){
+  var h=w+5,a=ang*Math.PI/180,t=[[hx,hy],[hx-h*Math.cos(a-.5),hy-h*Math.sin(a-.5)],[hx-h*Math.cos(a+.5),hy-h*Math.sin(a+.5)]];
+  return '<path d="'+d+'" style="fill:none;stroke:'+col+';stroke-opacity:.25;stroke-width:'+(w+5)+';stroke-linecap:round"/><path d="'+d+'" class="fl" style="stroke:'+col+';stroke-width:'+w+'"/><polygon points="'+t.map(function(q){return q[0]+','+q[1]}).join(' ')+'" style="fill:'+col+'"/>';
+}
+function engSvg(th,mode,Pn,p){
+  p=p||'e';var A=mode==='anat';
+  var r=36,l=118,yc=328,cx=200,ph=(th%360)*Math.PI/180,sn=Math.sin(ph),cs=Math.cos(ph),pinY=yc-(r*cs+Math.sqrt(l*l-r*r*sn*sn)),crown=pinY-34,px=cx+r*sn,py=yc-r*cs,k=Math.floor(th/180)%4;
+  var lift=function(t,t0,D){var u=(((t-t0)%720)+720)%720;return u<D?5.5*(1-Math.cos(2*Math.PI*u/D)):0};
+  var LI=lift(th,-10,230),LE=lift(th,495,235),wrap=function(d){return ((d+360)%720+720)%720-360},cI=180+0.5*wrap(th-105),cE=180+0.5*wrap(th-612.5);
+  var o='<defs>'+lgd(p+'M',1,0,[[0,'#3d4666'],[.22,'#aab4d0'],[.5,'#7280a3'],[.78,'#444e6e'],[1,'#252c47']])+lgd(p+'S',1,0,[[0,'#59627f'],[.2,'#f1f4fc'],[.5,'#97a3c1'],[.8,'#cfd6ea'],[1,'#39415d']])+lgd(p+'D',1,0,[[0,'#252c47'],[.5,'#667290'],[1,'#252c47']])+lgd(p+'W',0,1,[[0,'#7dd3fc'],[1,'#0369a1']])+lgd(p+'O',0,1,[[0,'#fbbf24'],[1,'#92400e']])+rgd(p+'H',[[0,'#fffbe0'],[.35,'#fde047'],[.7,'#f97316'],[1,'#dc2626']])+lgd(p+'C',0,1,[[0,'#bae6fd'],[1,'#38bdf8']])+lgd(p+'G',0,1,[[0,'#9ca3af'],[1,'#4b5563']])+lgd(p+'Z',1,0,[[0,'#94a3b8'],[.4,'#ffffff'],[1,'#8896ad']])+rgd(p+'L',[[0,'#22d3ee',.16],[1,'#22d3ee',0]])+rgd(p+'F',[[0,'#fff59d',1],[1,'#fde047',0]])+lgd(p+'X',0,1,[[0,'#7f1d1d'],[1,'#ef4444']])+'</defs>';
+  o+='<g transform="translate(0,12)">';
+  o+='<ellipse cx="200" cy="225" rx="190" ry="215" style="fill:url(#'+p+'L)"/>';
+  /* الكتلة */
+  o+='<rect x="105" y="138" width="40" height="162" style="fill:url(#'+p+'M)"/><rect x="255" y="138" width="40" height="162" style="fill:url(#'+p+'M)"/>';
+  o+='<rect x="117" y="146" width="20" height="140" rx="5" style="fill:url(#'+p+'W);fill-opacity:.8"/><rect x="263" y="146" width="20" height="140" rx="5" style="fill:url(#'+p+'W);fill-opacity:.8"/><path class="fl" d="M127 282V150" style="stroke:#e0f2fe;stroke-width:2;stroke-opacity:.8"/><path class="fl" d="M273 282V150" style="stroke:#e0f2fe;stroke-width:2;stroke-opacity:.8"/>';
+  o+='<rect x="145" y="138" width="110" height="162" style="fill:#070b19"/><path d="M145 138V300M255 138V300" style="stroke:#c5cde4;stroke-width:1.2;stroke-opacity:.55"/>';
+  /* كرنك كيس */
+  o+='<rect x="125" y="300" width="150" height="96" style="fill:#070b19"/><rect x="105" y="300" width="20" height="96" style="fill:url(#'+p+'M)"/><rect x="275" y="300" width="20" height="96" style="fill:url(#'+p+'M)"/>';
+  o+='<path d="M105 396L295 396L279 430Q200 441 121 430Z" style="fill:url(#'+p+'M)"/><path d="M127 413Q164 406 200 413T273 413L275 426Q200 435 125 426Z" style="fill:url(#'+p+'O);fill-opacity:.92"/><path d="M127 413Q164 406 200 413T273 413" style="fill:none;stroke:#fde68a;stroke-opacity:.7;stroke-width:1.2"/>';
+  /* الرأس */
+  o+='<rect x="105" y="70" width="190" height="68" style="fill:url(#'+p+'M)"/><rect x="105" y="70" width="190" height="3" style="fill:#e5e9f5;fill-opacity:.5"/>';
+  o+='<path d="M105 86H138C158 86 182 96 182 112V128H158V112C158 104 148 100 138 100H105Z" style="fill:#070b19"/><path d="M295 86H262C242 86 218 96 218 112V128H242V112C242 104 252 100 262 100H295Z" style="fill:#070b19"/><path d="M145 138L160 128H240L255 138Z" style="fill:#070b19"/>';
+  o+='<circle cx="122" cy="118" r="5" style="fill:url(#'+p+'D);stroke:#cbd5e1;stroke-width:.8"/><circle cx="278" cy="118" r="5" style="fill:url(#'+p+'D);stroke:#cbd5e1;stroke-width:.8"/>';
+  /* الغاز */
+  var gp='M145 138L160 128H240L255 138V'+crown+'H145Z',pr=Pn||0;
+  if(k===0)o+='<path d="'+gp+'" style="fill:url(#'+p+'C);fill-opacity:.4"/>';
+  else if(k===1)o+='<path d="'+gp+'" style="fill:url(#'+p+'C);fill-opacity:'+(.4+.45*pr)+'"/>';
+  else if(k===2){var hf=th<352?0:Math.min(1,(th-352)/14),fo=th<430?1:1-(th-430)/110*.7;o+='<path d="'+gp+'" style="fill:url(#'+p+'C);fill-opacity:.55"/>';if(hf>0)o+='<path d="'+gp+'" style="fill:url(#'+p+'H);fill-opacity:'+(hf*fo)+'"/>'}
+  else o+='<path d="'+gp+'" style="fill:url(#'+p+'G);fill-opacity:'+(.5-.3*Math.max(0,(th-540)/180))+'"/>';
+  /* غطاء الكامات */
+  o+='<rect x="105" y="4" width="190" height="66" rx="9" style="fill:#0b1124;stroke:#8190b5;stroke-width:1.6"/>';
+  var cam=function(x,a){return '<g transform="translate('+x+',19) rotate('+a+')"><path d="M-9 0A9 9 0 0 0 9 0L2.9 -16.6A3 3 0 0 0 -2.9 -16.6Z" style="fill:url(#'+p+'S);stroke:#1b2238;stroke-width:1"/><circle r="3" style="fill:#1b2238"/></g>'};
+  o+=cam(170,cI)+cam(230,cE);
+  var valve=function(x,li,cl){
+    var yh=125+li,s='';
+    s+='<rect x="'+(x-5)+'" y="70" width="10" height="42" style="fill:url(#'+p+'D)"/>';
+    s+='<rect x="'+(x-2.5)+'" y="'+(36+li)+'" width="5" height="'+(yh-8-36-li)+'" style="fill:url(#'+p+'S)"/>';
+    var pts=[];for(var i=0;i<=8;i++)pts.push((x+(i%2?7:-7))+','+(70-(70-(52+li))*i/8));
+    s+='<polyline points="'+pts.join(' ')+'" style="fill:none;stroke:#f0b35a;stroke-width:2;stroke-linejoin:round"/>';
+    s+='<rect x="'+(x-8)+'" y="'+(48+li)+'" width="16" height="4" rx="1" style="fill:url(#'+p+'D);stroke:#cbd5e1;stroke-width:.6"/>';
+    s+='<rect x="'+(x-10)+'" y="'+(28+li)+'" width="20" height="8" rx="2" style="fill:#aab4cd;stroke:#1b2238;stroke-width:.8"/>';
+    s+='<path d="M'+(x-3)+' '+(yh-8)+'L'+(x-12)+' '+yh+'L'+(x-12)+' '+(yh+3)+'L'+(x+12)+' '+(yh+3)+'L'+(x+12)+' '+yh+'L'+(x+3)+' '+(yh-8)+'Z" style="fill:url(#'+p+'S);stroke:'+cl+';stroke-width:1.2"/>';
+    return s;
+  };
+  o+=valve(170,LI,'#38bdf8')+valve(230,LE,'#f59e0b');
+  /* الشمعة */
+  o+='<rect x="196" y="22" width="8" height="10" rx="1" style="fill:url(#'+p+'S)"/><rect x="193" y="32" width="14" height="52" rx="3" style="fill:url(#'+p+'Z)"/><path d="M193 40H207M193 46H207M193 52H207" style="stroke:#64748b;stroke-width:.8"/><path d="M190 84h20v12h-20z" style="fill:url(#'+p+'D);stroke:#cbd5e1;stroke-width:.8"/><rect x="194" y="96" width="12" height="32" style="fill:url(#'+p+'S)"/><path d="M194 100h12M194 105h12M194 110h12M194 115h12M194 120h12" style="stroke:#1b2238;stroke-width:.8"/><path d="M200 128V131M206 124H212V132H200" style="fill:none;stroke:#e5e9f5;stroke-width:1.8"/>';
+  if(th>=345&&th<=362)o+='<circle cx="203" cy="133" r="18" style="fill:url(#'+p+'F)"/><polyline points="201,131 197,135 204,136 199,141 206,142" style="fill:none;stroke:#fffde7;stroke-width:2;stroke-linejoin:round"/>';
+  /* المجمّعات */
+  o+='<rect x="40" y="82" width="62" height="22" rx="3" style="fill:url(#'+p+'M)"/><rect x="44" y="87" width="55" height="12" style="fill:#070b19"/><rect x="99" y="77" width="8" height="32" style="fill:url(#'+p+'D)"/><rect x="298" y="82" width="62" height="22" rx="3" style="fill:url(#'+p+'M)"/><rect x="301" y="87" width="55" height="12" style="fill:#070b19"/><rect x="293" y="77" width="8" height="32" style="fill:url(#'+p+'D)"/>';
+  if(LE>0.3)o+='<rect x="298" y="82" width="62" height="22" rx="3" style="fill:url(#'+p+'X);fill-opacity:.55"/>';
+  if(LI>0.3)o+=flowp('M46 93H140Q170 93 170 118V140','#38bdf8',4,170,140,90);
+  if(LE>0.3)o+=flowp('M230 140V118Q230 93 260 93H354','#f59e0b',4,354,93,0);
+  /* المكبس */
+  o+='<g transform="translate(0,'+crown+')"><rect x="148" y="0" width="104" height="58" rx="4" style="fill:url(#'+p+'S);stroke:#1b2238;stroke-width:1"/><rect x="156" y="22" width="88" height="36" style="fill:#070b19"/><rect x="156" y="22" width="14" height="24" style="fill:url(#'+p+'D)"/><rect x="230" y="22" width="14" height="24" style="fill:url(#'+p+'D)"/><path d="M148 7H252M148 13.5H252M148 20H252" style="stroke:#141a30;stroke-width:2.4"/><path d="M148 8.6H252M148 15.1H252" style="stroke:#e8ecf7;stroke-width:.8;stroke-opacity:.8"/><rect x="149" y="0" width="102" height="1.6" style="fill:#fff;fill-opacity:.65"/></g>';
+  /* الكرنك والذراع */
+  var rl=Math.sqrt((px-cx)*(px-cx)+(py-pinY)*(py-pinY)),ang=Math.atan2(py-pinY,px-cx)*180/Math.PI;
+  o+='<g transform="translate('+cx+','+yc+') rotate('+(th%360)+')"><path d="M-18 6L18 6L40 36Q0 64 -40 36Z" style="fill:url(#'+p+'D);stroke:#cbd5e1;stroke-width:1"/><circle cx="0" cy="32" r="6" style="fill:#070b19"/><path d="M-12 -36L12 -36L17 4L-17 4Z" style="fill:url(#'+p+'M);stroke:#1b2238;stroke-width:1"/><circle r="15" style="fill:url(#'+p+'S);stroke:#1b2238;stroke-width:1.2"/><circle r="5" style="fill:#1b2238"/></g>';
+  o+='<g transform="translate('+cx+','+pinY+') rotate('+ang+')"><path d="M0 -6L'+rl+' -10L'+rl+' 10L0 6Z" style="fill:url(#'+p+'S);stroke:#1b2238;stroke-width:1"/><path d="M12 0H'+(rl-14)+'" style="stroke:#59627f;stroke-width:3;stroke-linecap:round"/><circle cx="'+rl+'" cy="0" r="13" style="fill:url(#'+p+'S);stroke:#1b2238;stroke-width:1.2"/><circle cx="0" cy="0" r="10" style="fill:url(#'+p+'S);stroke:#1b2238;stroke-width:1"/><circle cx="0" cy="0" r="5.5" style="fill:#2a3250;stroke:#e5e9f5;stroke-width:1"/></g>';
+  o+='<circle cx="'+px+'" cy="'+py+'" r="8" style="fill:url(#'+p+'D);stroke:#e5e9f5;stroke-width:1.2"/><circle cx="'+px+'" cy="'+py+'" r="3" style="fill:#0b1124"/>';
+  if(!A){
+    var nm=['شوط السحب','شوط الضغط','شوط الاحتراق','شوط العادم'][k];
+    o+='<g style="font-size:10;font-weight:700"><text x="8" y="22" style="fill:#e6ebf7">'+nm+'</text><text x="8" y="38" style="fill:'+(LI>0.3?'#38bdf8':'#8b96b3')+'">صمام السحب: '+(LI>0.3?'مفتوح':'مغلق')+'</text><text x="8" y="54" style="fill:'+(LE>0.3?'#f59e0b':'#8b96b3')+'">صمام العادم: '+(LE>0.3?'مفتوح':'مغلق')+'</text></g>';
+  }
+  if(A){
+    var lab=function(x,y,t,tx,ty,side){var ex=side<0?x+42:x-42;return '<path d="M'+ex+' '+y+'L'+tx+' '+ty+'" style="stroke:#22d3ee;stroke-opacity:.7;stroke-width:1;fill:none"/><circle cx="'+tx+'" cy="'+ty+'" r="2.6" style="fill:#22d3ee"/><text x="'+x+'" y="'+(y+3)+'" style="fill:#e6ebf7;font-size:10;text-anchor:middle;font-weight:700">'+t+'</text>'};
+    o+=lab(48,22,'عمود الكامات',160,19,-1)+lab(48,62,'صمام السحب',168,62,-1)+lab(48,126,'مجرى السحب',70,100,-1)+lab(48,196,'ماء التبريد',127,200,-1)+lab(48,262,'الكباس',170,crown+30,-1)+lab(48,340,'عمود الكرنك',cx,yc,-1)+lab(48,418,'كارتير الزيت',150,418,-1);
+    o+=lab(352,22,'شمعة الإشعال',203,26,1)+lab(352,62,'صمام العادم',232,62,1)+lab(352,126,'مجرى العادم',330,100,1)+lab(352,168,'رأس الأسطوانة',280,112,1)+lab(352,226,'الحلقات',250,crown+13,1)+lab(352,290,'ذراع التوصيل',(px+cx)/2+8,(py+pinY)/2,1)+lab(352,368,'كتلة الأسطوانات',286,350,1);
+    var hs=function(k,tag,at){return '<'+tag+' class="hs" fill="none" data-p="'+k+'" '+at+'/>'};
+    o+=hs('spark','rect','x="190" y="22" width="20" height="108"')+hs('iv','rect','x="156" y="28" width="28" height="104"')+hs('ev','rect','x="216" y="28" width="28" height="104"')+hs('cam','rect','x="150" y="2" width="100" height="34"')+hs('head','rect','x="105" y="70" width="190" height="68"')+hs('piston','rect','x="148" y="'+(crown+22)+'" width="104" height="36"')+hs('rings','rect','x="148" y="'+crown+'" width="104" height="22"')+hs('rod','rect','x="'+(Math.min(px,cx)-12)+'" y="'+(pinY+10)+'" width="'+(Math.abs(px-cx)+24)+'" height="'+(py-pinY-14)+'"')+hs('crank','circle','cx="200" cy="328" r="52"')+hs('water','rect','x="115" y="146" width="24" height="140"')+hs('water','rect','x="261" y="146" width="24" height="140"')+hs('block','rect','x="105" y="290" width="190" height="6"')+hs('pan','rect','x="105" y="396" width="190" height="40"')+hs('inm','rect','x="40" y="80" width="64" height="26"')+hs('exm','rect','x="296" y="80" width="64" height="26"');
+  }
+  return o+'</g>';
+}
+
+/* ===== رسم سيارة الهايبرد (مقطع) ===== */
+function fpl(pts,kw,col,rev){
+  if(kw<0.2)return '';
+  var p=rev?pts.slice().reverse():pts,w=Math.max(2.6,Math.min(8,kw/70*8)),d='M'+p.map(function(q){return q.join(' ')}).join('L'),a=p[p.length-2],b=p[p.length-1],an=Math.atan2(b[1]-a[1],b[0]-a[0])*180/Math.PI;
+  return flowp(d,col,w,b[0],b[1],an);
+}
+function n1(x){return Math.round(x*10)/10}
+function carSvg(S){
+  var ME='#f59e0b',AC='#a78bfa',DC='#38bdf8',RG='#34d399',OR='#fb923c',o='';
+  var dur=S.v<1?0:0.25+(1-Math.min(S.v,120)/120)*1.6,an=(dur?'animation-duration:'+dur+'s;':'animation-play-state:paused;')+(S.rev?'animation-direction:reverse;':'');
+  o+='<defs>'+lgd('hcP',0,1,[[0,'#7aa7ff'],[.5,'#3567df'],[1,'#1b2f7a']])+lgd('hcG',0,1,[[0,'#cfeaff',.6],[1,'#6aa9dc',.25]])+rgd('hcR',[[0,'#f8fafc'],[.65,'#9aa6bd'],[1,'#4a546c']])+lgd('hcE',1,0,[[0,'#3d4666'],[.25,'#aab4d0'],[.55,'#7280a3'],[1,'#2e3654']])+lgd('hcB',0,1,[[0,'#1d4ed8'],[1,'#0b1f55']])+lgd('hcI',0,1,[[0,'#b6c0d8'],[1,'#5b6684']])+rgd('hcS',[[0,'#000',.55],[1,'#000',0]])+rgd('hcL',[[0,'#fde68a',.9],[1,'#fde68a',0]])+'</defs>';
+  o+='<g transform="translate(0,10)">';
+  o+='<ellipse cx="152" cy="181" rx="148" ry="7" style="fill:url(#hcS)"/><path d="M0 180H300" style="stroke:#26304d;stroke-width:2"/>'+(S.v>=1?'<path class="road'+(S.rev?' rv':'')+'" d="M0 187H300"/>':'');
+  /* الهيكل */
+  var body='M16 156L14 126C14 106 20 92 36 88L110 74C124 72 134 68 144 60L168 36C172 32 178 31 186 31L226 31C240 31 252 38 262 52L282 88C288 94 290 104 290 122L290 156L266 156A30 30 0 0 0 206 156L100 156A30 30 0 0 0 40 156Z';
+  o+='<path d="'+body+'" style="fill:url(#hcP);fill-opacity:.5;stroke:#c7d2fe;stroke-width:2.2;stroke-linejoin:round"/>';
+  o+='<path d="M148 60L170 38C174 35 179 34 186 34L226 34C238 34 247 40 255 52L268 80L148 80Z" style="fill:url(#hcG)"/><path d="M202 34V80" style="stroke:#c7d2fe;stroke-opacity:.8;stroke-width:3"/><path d="M26 112C60 98 104 90 138 86" style="fill:none;stroke:#fff;stroke-opacity:.45;stroke-width:1.6;stroke-linecap:round"/><path d="M156 86H184M214 86H242" style="stroke:#e2e8f0;stroke-width:2.4;stroke-linecap:round"/>';
+  o+='<path d="M16 104L30 100L30 108L17 112Z" style="fill:#fde68a"/><circle cx="20" cy="106" r="14" style="fill:url(#hcL)"/><path d="M286 100L290 104L290 114L285 112Z" style="fill:#ef4444"/>';
+  /* العجلات */
+  var arch=function(cx){return '<circle cx="'+cx+'" cy="156" r="30" style="fill:#0a0f1e"/><path d="M'+(cx-30)+' 156A30 30 0 0 1 '+(cx+30)+' 156" style="fill:none;stroke:#c7d2fe;stroke-width:2.2"/>'};
+  var wheel=function(cx){return '<circle cx="'+cx+'" cy="156" r="24" style="fill:#0d1117;stroke:#1f2a44;stroke-width:1.5"/><circle cx="'+cx+'" cy="156" r="19.5" style="fill:none;stroke:#1a2238;stroke-width:1"/><g class="whl" style="'+an+'"><circle cx="'+cx+'" cy="156" r="15" style="fill:url(#hcR)"/><circle cx="'+cx+'" cy="156" r="10.5" style="fill:#5b6684"/><path d="M'+cx+' 141L'+(cx+3.2)+' 150L'+(cx-3.2)+' 150Z M'+(cx+14)+' 152.5L'+(cx+5.5)+' 154.8L'+(cx+7)+' 158.5Z M'+(cx+8.5)+' 168.5L'+(cx+2.5)+' 160.5L'+(cx+6)+' 158.5Z M'+(cx-8.5)+' 168.5L'+(cx-2.5)+' 160.5L'+(cx-6)+' 158.5Z M'+(cx-14)+' 152.5L'+(cx-5.5)+' 154.8L'+(cx-7)+' 158.5Z" style="fill:#e5e9f5;stroke:#1b2238;stroke-width:.6"/><circle cx="'+cx+'" cy="156" r="3.4" style="fill:#2a3250;stroke:#e5e9f5;stroke-width:.8"/></g><path d="M'+(cx+9)+' 143.5A13 13 0 0 1 '+(cx+14)+' 150" style="fill:none;stroke:'+(S.fric>0.5?'#ef4444':'#f59e0b')+';stroke-width:4;stroke-linecap:round"/>'};
+  o+=arch(70)+arch(236)+wheel(70)+wheel(236);
+  if(S.fric>0.5)o+='<circle cx="70" cy="156" r="26" style="fill:none;stroke:#ef4444;stroke-width:2.5;stroke-opacity:.9"/><circle cx="236" cy="156" r="26" style="fill:none;stroke:#ef4444;stroke-width:2.5;stroke-opacity:.9"/><text x="152" y="170" style="fill:#fca5a5;font-size:9;font-weight:700;text-anchor:middle">فرامل '+n1(S.fric)+' kW</text>';
+  /* المحرك */
+  var on=S.engOn;
+  if(on)o+='<rect x="24" y="90" width="48" height="36" rx="8" style="fill:#f59e0b;fill-opacity:.22"/>';
+  o+='<rect x="28" y="94" width="38" height="28" rx="4" style="fill:url(#hcE);stroke:'+(on?ME:'#8190b5')+';stroke-width:1.8"/><rect x="28" y="94" width="38" height="5" rx="2" style="fill:#1b2238"/>';
+  for(var i=0;i<4;i++)o+='<rect x="'+(31+i*9)+'" y="101" width="6" height="17" rx="1.5" style="fill:#070b19"/><rect x="'+(31+i*9)+'" y="'+(on?(i%2?104:111):(i%2?108:108))+'" width="6" height="5" rx="1" style="fill:'+(on?'#fde68a':'#9aa6bd')+'"/>';
+  o+='<text x="47" y="132" style="fill:#e6ebf7;font-size:6.5;text-anchor:middle;font-weight:700">محرك بنزين</text>';
+  /* الناقل */
+  o+='<rect x="80" y="100" width="48" height="26" rx="6" style="fill:url(#hcE);stroke:#8190b5;stroke-width:1.6"/>';
+  [[93,'MG1'],[115,'MG2']].forEach(function(q){o+='<circle cx="'+q[0]+'" cy="113" r="9.5" style="fill:#0b1124;stroke:'+AC+';stroke-width:2.4"/><circle cx="'+q[0]+'" cy="113" r="5.2" style="fill:'+AC+';fill-opacity:.35;stroke:#e5e9f5;stroke-width:.7"/><text x="'+q[0]+'" y="115.5" style="fill:#fff;font-size:5.4;text-anchor:middle;font-weight:700">'+q[1]+'</text>'});
+  /* الإنفرتر */
+  o+='<rect x="80" y="80" width="46" height="10" rx="2.5" style="fill:url(#hcI);stroke:#ef4444;stroke-width:1.6"/><path d="M100 81V89M104 81V89M108 81V89M112 81V89" style="stroke:#3a4466;stroke-width:1"/><text x="90" y="88" style="fill:#111827;font-size:5.6;text-anchor:middle;font-weight:800">إنفرتر</text>';
+  /* بطارية HV */
+  o+='<rect x="166" y="112" width="38" height="32" rx="4" style="fill:url(#hcB);stroke:#38bdf8;stroke-width:1.8"/>';
+  var cells=18,fl=Math.round(S.soc/100*cells),sc=S.soc<20?'#ef4444':S.soc<50?'#f59e0b':'#34d399';
+  for(var j=0;j<cells;j++){var cc=j%6,rr=Math.floor(j/6);o+='<rect x="'+(169+cc*5.8)+'" y="'+(130-rr*0+(-rr)*0+ (rr-0)*0 + (-0))+'" width="0" height="0"/>'}
+  for(j=0;j<cells;j++){var c2=j%6,r2=Math.floor(j/6);o+='<rect x="'+(168.6+c2*5.7)+'" y="'+(115+r2*8.6)+'" width="4.8" height="7.2" rx="1" style="fill:'+(j<fl?sc:'#0f1b3d')+';fill-opacity:'+(j<fl?.95:.9)+'"/>'}
+  o+='<rect x="170" y="94" width="30" height="12" rx="3" style="fill:url(#hcI);stroke:#38bdf8;stroke-width:1.2"/><text x="185" y="102.6" style="fill:#111827;font-size:6;text-anchor:middle;font-weight:800">DC-DC</text>';
+  o+='<text x="185" y="156" style="fill:#e6ebf7;font-size:7.5;text-anchor:middle;font-weight:700">'+Math.round(S.soc)+'%</text>';
+  /* خزان الوقود */
+  o+='<rect x="130" y="126" width="30" height="20" rx="6" style="fill:#78531f;fill-opacity:.55;stroke:#fbbf24;stroke-width:1.2"/><text x="145" y="139" style="fill:#fde68a;font-size:6;text-anchor:middle;font-weight:700">وقود</text>';
+  /* الكابلات البرتقالية */
+  var cab=function(d){return '<path d="'+d+'" style="fill:none;stroke:'+OR+';stroke-opacity:.5;stroke-width:3;stroke-linecap:round"/>'};
+  o+=cab('M126 85H185V112')+cab('M93 90V103')+cab('M115 90V103')+cab('M185 106V112');
+  /* التدفقات */
+  o+=S.m==='ck'?fpl([[66,108],[80,108]],S.Pc*0.93,ME,true):fpl([[66,108],[80,108]],S.Pe,ME,false);
+  o+=S.isReg?fpl([[104,126],[104,156],[74,156]],S.Pr,RG,true):fpl([[104,126],[104,156],[74,156]],S.Pew+S.Pm,S.Pew>=S.Pm?ME:AC,false);
+  o+=S.m==='ck'?fpl([[93,90],[93,103]],S.Pc,AC,false):fpl([[93,90],[93,103]],S.ge,AC,true);
+  o+=S.isReg?fpl([[115,90],[115,103]],S.re,RG,true):fpl([[115,90],[115,103]],S.me,AC,false);
+  o+=S.chg>0.05?fpl([[126,85],[185,85],[185,112]],S.chg,S.isReg?RG:DC,false):fpl([[126,85],[185,85],[185,112]],S.dis,DC,true);
+  o+='</g>';
+  /* لوحة العدّادات */
+  o+='<text x="150" y="16" style="fill:#e6ebf7;font-size:12.5;font-weight:800;text-anchor:middle">'+S.cap+'</text><text x="8" y="34" style="fill:#cbd5e1;font-size:10">المحرك: '+S.eng+S.ev+'</text><text x="292" y="34" style="fill:#cbd5e1;font-size:10;text-anchor:end">'+Math.round(S.v)+' كم/س'+(S.rev?' ⏪':'')+'</text>';
+  var nx=150+130*Math.max(-1,Math.min(1,S.val));
+  o+='<rect x="20" y="207" width="80" height="9" rx="4" style="fill:#10b981;fill-opacity:.85"/><rect x="100" y="207" width="100" height="9" style="fill:#3b82f6;fill-opacity:.85"/><rect x="200" y="207" width="80" height="9" rx="4" style="fill:#ef4444;fill-opacity:.85"/><polygon points="'+nx+',205 '+(nx-5)+',197 '+(nx+5)+',197" style="fill:#fff"/><g style="fill:#8b96b3;font-size:8.5;text-anchor:middle"><text x="60" y="228">شحن</text><text x="150" y="228">اقتصادي</text><text x="240" y="228">قدرة</text></g>';
+  o+='<g style="fill:#e6ebf7;font-size:9.5;text-anchor:middle;font-weight:700"><text x="50" y="246">محرك '+n1(S.Pe)+' kW</text><text x="150" y="246">كهربا '+n1(S.isReg?S.Pr:S.Pm)+' kW</text><text x="250" y="246">بطارية '+(S.chg>0.05?'+'+n1(S.chg):'-'+n1(S.net))+' kW</text></g>';
+  return o;
+}
 
 /* ===== محاكاة وتفاعل ===== */
 var fsTm=null;
@@ -1481,21 +1661,14 @@ function fsc(th,CR){
 function fs(){
   var th=+$('fsA').value,CR=g('fsC');if(!(CR>2))CR=10;
   $('fsAv').textContent=th;
-  var c=fsc(th,CR),sc=.8,cy=250,rr=43*sc,ph=c.ph,sn=Math.sin(ph),cs=Math.cos(ph),pinY=cy-(43*cs+Math.sqrt(143*143-43*43*sn*sn))*sc,px=140+rr*sn,py=cy-rr*cs,k=Math.floor(th/180)%4;
-  var io=th<=220||th>=710,eo=th>=495||th<=10,sp=th>=345&&th<=360,col=['#93c5fd','#60a5fa','#f97316','#9ca3af'][k],nm=['شوط السحب','شوط الضغط','شوط الاحتراق (القدرة)','شوط العادم'],pt=pinY-16,o='',i;
-  o+='<rect x="90" y="75" width="100" height="'+(pt-75)+'" style="fill:'+col+';opacity:.55"/><path d="M90 75V190M190 75V190" style="stroke:var(--ink);stroke-width:3"/><rect x="80" y="50" width="120" height="25" style="fill:var(--line);stroke:var(--ink);stroke-width:2"/>';
-  o+='<rect x="136" y="26" width="8" height="26" style="fill:var(--mute)"/>'+(sp?'<circle cx="140" cy="78" r="10" style="fill:#fde047;opacity:.95"/>':'');
-  o+='<rect x="110" y="30" width="4" height="'+(io?53:46)+'" style="fill:#3b82f6"/><rect x="100" y="'+(io?83:75)+'" width="24" height="4" style="fill:#3b82f6"/><rect x="166" y="30" width="4" height="'+(eo?53:46)+'" style="fill:#f59e0b"/><rect x="156" y="'+(eo?83:75)+'" width="24" height="4" style="fill:#f59e0b"/>';
-  if(io)o+='<path d="M112 6V24m-5 -7l5 7l5 -7" style="stroke:#3b82f6;stroke-width:3;fill:none"/>';
-  if(eo)o+='<path d="M168 24V6m-5 7l5 -7l5 7" style="stroke:#f59e0b;stroke-width:3;fill:none"/>';
-  o+='<rect x="92" y="'+pt+'" width="96" height="30" rx="4" style="fill:var(--acc);opacity:.9"/><path d="M92 '+(pt+7)+'H188M92 '+(pt+12)+'H188" style="stroke:var(--ink);stroke-width:1.5"/>';
-  o+='<circle cx="140" cy="'+cy+'" r="'+rr+'" style="fill:none;stroke:var(--mute);stroke-dasharray:3 3"/><path d="M140 '+pinY+'L'+px+' '+py+'" style="stroke:var(--ink);stroke-width:5;stroke-linecap:round"/><circle cx="140" cy="'+pinY+'" r="4" style="fill:var(--ink)"/><circle cx="'+(140-rr*.9*sn)+'" cy="'+(cy+rr*.9*cs)+'" r="9" style="fill:var(--mute)"/><circle cx="'+px+'" cy="'+py+'" r="5" style="fill:var(--ink)"/><circle cx="140" cy="'+cy+'" r="6" style="fill:var(--ink)"/>';
-  o+='<text x="150" y="14" style="fill:var(--ink);font-size:13;font-weight:800;text-anchor:middle">'+nm[k]+'</text><g style="fill:var(--ink);font-size:10.5"><text x="208" y="95">السحب: <tspan style="font-weight:700">'+(io?'مفتوح':'مغلق')+'</tspan></text><text x="208" y="113">العادم: <tspan style="font-weight:700">'+(eo?'مفتوح':'مغلق')+'</tspan></text><text x="208" y="131">الشرارة: <tspan style="font-weight:700">'+(sp?'تشتغل!':'لا')+'</tspan></text><text x="208" y="149">الضغط: <tspan style="font-weight:700">'+num(c.P)+' bar</tspan></text></g>';
-  var Pm=0,ys=[];for(i=0;i<=180;i++){var q=fsc(i*4,CR).P;ys.push(q);Pm=Math.max(Pm,q)}
-  o+='<path d="M30 335H282M30 335V278" style="stroke:var(--mute);fill:none"/><path d="'+ys.map(function(y,j){return (j?'L':'M')+(30+j/180*250)+' '+(335-y/Pm*55)}).join('')+'" style="'+ZS+'"/><path d="M'+(30+th/720*250)+' 278V335" style="stroke:#ef4444;stroke-dasharray:3 3"/><circle cx="'+(30+th/720*250)+'" cy="'+(335-c.P/Pm*55)+'" r="4" style="fill:#ef4444"/><text x="32" y="276" style="fill:var(--mute);font-size:9">منحنى الضغط خلال 720°</text>';
+  var c=fsc(th,CR),k=Math.floor(th/180)%4,ys=[],Pm=0,i;
+  for(i=0;i<=180;i++){var q=fsc(i*4,CR).P;ys.push(q);Pm=Math.max(Pm,q)}
+  var X=function(t){return 34+t/720*340};
+  var o=engSvg(th,'sim',c.P/Pm,'e');
+  o+='<g transform="translate(0,470)"><path d="M34 62H376M34 62V8" style="stroke:#6b7690;fill:none"/><path d="'+ys.map(function(y,j){return (j?'L':'M')+X(j*4)+' '+(62-y/Pm*50)}).join('')+'" style="fill:none;stroke:#22d3ee;stroke-width:2.6;stroke-linejoin:round"/><path d="M'+X(th)+' 8V62" style="stroke:#ef4444;stroke-dasharray:3 3"/><circle cx="'+X(th)+'" cy="'+(62-c.P/Pm*50)+'" r="4.5" style="fill:#ef4444"/><text x="36" y="6" style="fill:#8b96b3;font-size:9">منحنى ضغط الأسطوانة خلال 720°</text><g style="fill:#8b96b3;font-size:8.5;text-anchor:middle"><text x="'+X(90)+'" y="75">سحب</text><text x="'+X(270)+'" y="75">ضغط</text><text x="'+X(450)+'" y="75">احتراق</text><text x="'+X(630)+'" y="75">عادم</text></g></g>';
   $('fsSvg').innerHTML=o;
-  var ex=['الكباس ينزل وصمام السحب مفتوح، فيدخل الهوا والبنزين.','الصمامين مسكرين والكباس يطلع، فبينضغط الخليط وبيسخن. قبل أعلى نقطة بقليل بتطلع الشرارة.','الخليط بيشتعل والغازات بتتمدد وبتدفع الكباس لتحت. هاد الشوط الوحيد اللي بيعطي شغل.','صمام العادم مفتوح والكباس يطلع، فبيطرد الغازات المحروقة.'][k];
-  $('fsOut').innerHTML='<b>'+nm[k]+'</b>: '+ex+'<br>ضغط الأسطوانة التقريبي = <b>'+num(c.P)+'</b> bar<br><small>القانون: أثناء الانضغاط P × V^1.35 = ثابت، وبعد الاحتراق الضغط بيقفز بحوالي 3 أضعاف. القيم تقريبية للتعلم. شوط واحد = 180° كرنك، والدورة الكاملة = 720°.</small>';
+  var nm=['شوط السحب','شوط الضغط','شوط الاحتراق (القدرة)','شوط العادم'][k],ex=['الكباس ينزل وصمام السحب مفتوح، فيدخل الهوا والبنزين.','الصمامين مسكرين والكباس يطلع، فبينضغط الخليط وبيسخن. قبل أعلى نقطة بقليل بتطلع الشرارة.','الخليط بيشتعل والغازات بتتمدد وبتدفع الكباس لتحت. هاد الشوط الوحيد اللي بيعطي شغل.','صمام العادم مفتوح والكباس يطلع، فبيطرد الغازات المحروقة.'][k];
+  $('fsOut').innerHTML='<b>'+nm+'</b>: '+ex+'<br>ضغط الأسطوانة التقريبي = <b>'+num(c.P)+'</b> bar<br><small>القانون: أثناء الانضغاط P × V^1.35 = ثابت، وبعد الاحتراق الضغط بيقفز بحوالي 3 أضعاف. القيم تقريبية للتعلم. شوط واحد = 180° كرنك، والدورة الكاملة = 720°. الكامات بتلف بنص سرعة الكرنك.</small>';
 }
 $('fsA').addEventListener('input',fs);$('fsC').addEventListener('input',fs);
 $('fsPlay').onclick=function(){
@@ -1534,32 +1707,9 @@ function hb(){
   var still=m==='rd'||m==='ck'||m==='ch'||m==='cd',v=still?0:vv,isReg=m==='rg'||m==='hb'||m==='co'||m==='fl',fric=isReg?Math.max(0,dem-Pr):0;
   var ge=Pg*eg,re=Pr*em,me=Pm/em,S=ge+re-me-Pc,chg=S>0?S*ei:0,dis=S<0?-S/ei:0,net=dis+0.3-chg,Pe=Pew+Pg,fuel=Pe*3600/(0.35*43500)/0.745,dsoc=-net/60/B*100,Ek=0.5*mass*Math.pow(vv/3.6,2)/3.6e6*1000,loss=(me+Pc+ge+re)*0.03,engOn=Pe>0.05||m==='ck';
   HB_last=dsoc;HB_kind=Pr>0.05?'reg':(Pe>0.05&&chg>0.05?'chg':(Pe>0.05?'eng':'ev'));
-  var ME='#f59e0b',AC='#8b5cf6',DC='#3b82f6',RG='#10b981',OR='#fb923c',o='';
-  var dur=v<1?0:0.25+(1-Math.min(v,120)/120)*1.6,an=(dur?'animation-duration:'+dur+'s;':'animation-play-state:paused;')+(rev?'animation-direction:reverse;':'');
-  var wh=function(cx){return '<g class="whl" style="'+an+'"><circle cx="'+cx+'" cy="150" r="21" style="fill:#1f2937"/><circle cx="'+cx+'" cy="150" r="12" style="fill:var(--line);stroke:var(--mute)"/><path d="M'+(cx-12)+' 150H'+(cx+12)+'M'+cx+' 138V162M'+(cx-8.5)+' 141.5L'+(cx+8.5)+' 158.5M'+(cx+8.5)+' 141.5L'+(cx-8.5)+' 158.5" style="stroke:var(--mute);stroke-width:2"/></g>'};
-  o+='<path d="M0 172H300" style="stroke:var(--line);stroke-width:2"/>'+(v>=1?'<path class="road'+(rev?' rv':'')+'" d="M0 178H300"/>':'');
-  o+='<path d="M12 140C12 118 16 92 34 86L96 81C106 80 112 77 118 71L134 57C138 53 146 53 152 53L200 53C212 53 222 60 230 72L248 96L272 102C284 106 290 120 290 140L290 156L12 156Z" style="fill:var(--line);fill-opacity:.5;stroke:var(--ink);stroke-width:2.5"/><path d="M122 70L136 59L196 59C208 59 216 65 223 75L236 94L122 94Z" style="fill:#93c5fd;fill-opacity:.35"/>';
-  o+='<circle cx="70" cy="150" r="27" style="fill:var(--card)"/><circle cx="238" cy="150" r="27" style="fill:var(--card)"/>'+wh(70)+wh(238);
-  if(fric>0.5)o+='<circle cx="70" cy="150" r="24" style="fill:none;stroke:#ef4444;stroke-width:3"/><circle cx="238" cy="150" r="24" style="fill:none;stroke:#ef4444;stroke-width:3"/><text x="154" y="152" style="fill:#ef4444;font-size:9;font-weight:700;text-anchor:middle">🛑 فرامل '+num(fric)+' kW</text>';
-  o+='<rect x="20" y="92" width="40" height="30" rx="5" style="fill:'+ME+';fill-opacity:'+(engOn?.45:.12)+';stroke:'+ME+';stroke-width:2.5"/><path d="M27 97V112M35 97V112M43 97V112M51 97V112" style="stroke:'+ME+';stroke-width:4;opacity:.7"/><text x="40" y="119" style="fill:var(--ink);font-size:7.5;text-anchor:middle;font-weight:700">محرك</text>';
-  o+='<rect x="86" y="100" width="62" height="28" rx="6" style="fill:var(--card);stroke:var(--ink);stroke-width:2"/><circle cx="102" cy="114" r="9" style="fill:none;stroke:'+AC+';stroke-width:2.5"/><circle cx="130" cy="114" r="9" style="fill:none;stroke:'+AC+';stroke-width:2.5"/><text x="102" y="116.5" style="fill:var(--ink);font-size:6.5;text-anchor:middle">MG1</text><text x="130" y="116.5" style="fill:var(--ink);font-size:6.5;text-anchor:middle">MG2</text>';
-  o+='<rect x="88" y="80" width="52" height="12" rx="3" style="fill:#fecaca;fill-opacity:.55;stroke:#ef4444;stroke-width:2"/><text x="114" y="89.5" style="fill:var(--ink);font-size:8;text-anchor:middle;font-weight:700">إنفرتر</text>';
-  var sc=soc<20?'#ef4444':soc<50?'#f59e0b':'#10b981';
-  o+='<rect x="206" y="92" width="64" height="28" rx="5" style="fill:var(--card);stroke:'+DC+';stroke-width:2.5"/><rect x="210" y="96" width="'+(56*soc/100)+'" height="20" rx="2" style="fill:'+sc+';opacity:.75"/><text x="238" y="110" style="fill:var(--ink);font-size:9;text-anchor:middle;font-weight:700">'+Math.round(soc)+'%</text><text x="238" y="132" style="fill:var(--ink);font-size:8;text-anchor:middle">بطارية HV</text>';
-  o+='<rect x="174" y="98" width="26" height="20" rx="4" style="fill:var(--card);stroke:'+DC+';stroke-width:2"/><text x="187" y="111" style="fill:var(--ink);font-size:7.5;text-anchor:middle">12V</text><path d="M206 108H200" style="stroke:'+OR+';stroke-width:3"/>';
-  var cab=function(d){return '<path d="'+d+'" style="fill:none;stroke:'+OR+';stroke-opacity:.45;stroke-width:3"/>'};
-  o+=cab('M140 86H238V92')+cab('M102 92V104')+cab('M130 92V104');
-  o+=m==='ck'?flw([[60,110],[86,110]],Pc*eg,ME,true,null):flw([[60,110],[86,110]],Pe,ME,false,null);
-  o+=isReg?flw([[116,128],[116,150],[74,150]],Pr,RG,true,[100,145]):flw([[116,128],[116,150],[74,150]],Pew+Pm,Pew>=Pm?ME:AC,false,[100,145]);
-  o+=m==='ck'?flw([[102,92],[102,104]],Pc,AC,false,null):flw([[102,92],[102,104]],ge,AC,true,null);
-  o+=isReg?flw([[130,92],[130,104]],re,RG,true,null):flw([[130,92],[130,104]],me,AC,false,null);
-  o+=chg>0.05?flw([[140,86],[238,86],[238,92]],chg,isReg?RG:DC,false,[190,80]):flw([[140,86],[238,86],[238,92]],dis,DC,true,[190,80]);
   var cap=HBN[m],eng=engOn?'🟢 يشتغل':'⚫ مطفأ',ev=(Pe<0.05&&(Pm>0.1||isReg)&&m!=='ck')?'  ⚡ EV':'';
-  o+='<text x="150" y="16" style="fill:var(--ink);font-size:12;font-weight:800;text-anchor:middle">'+cap+'</text><text x="8" y="36" style="fill:var(--ink);font-size:10">المحرك: '+eng+ev+'</text><text x="292" y="36" style="fill:var(--ink);font-size:10;text-anchor:end">'+Math.round(v)+' كم/س'+(rev?' ⏪':'')+'</text>';
-  var val=isReg?-Math.min(1,Pr/Mm):Math.min(1,(Pew+Pm)/(Em+Mm))-(chg>0.05&&!isReg?Math.min(1,chg/30)*0.4:0),nx=150+130*Math.max(-1,Math.min(1,val));
-  o+='<rect x="20" y="186" width="80" height="9" rx="3" style="fill:#10b981;opacity:.75"/><rect x="100" y="186" width="100" height="9" style="fill:#3b82f6;opacity:.75"/><rect x="200" y="186" width="80" height="9" rx="3" style="fill:#ef4444;opacity:.75"/><polygon points="'+nx+',183 '+(nx-5)+',176 '+(nx+5)+',176" style="fill:var(--ink)"/><g style="fill:var(--mute);font-size:8.5;text-anchor:middle"><text x="60" y="208">شحن</text><text x="150" y="208">اقتصادي</text><text x="240" y="208">قدرة</text></g>';
-  o+='<g style="fill:var(--ink);font-size:9.5;text-anchor:middle;font-weight:700"><text x="50" y="226">🛢 '+num(Pe)+' kW</text><text x="150" y="226">⚡ '+num(isReg?Pr:Pm)+' kW</text><text x="250" y="226">🔋 '+(chg>0.05?'+'+num(chg):'-'+num(net))+' kW</text></g>';
-  $('hbSvg').innerHTML=o;
+  var val=isReg?-Math.min(1,Pr/Mm):Math.min(1,(Pew+Pm)/(Em+Mm))-(chg>0.05&&!isReg?Math.min(1,chg/30)*0.4:0);
+  $('hbSvg').innerHTML=carSvg({m:m,Pe:Pe,Pew:Pew,Pg:Pg,Pm:Pm,Pr:Pr,Pc:Pc,ge:ge,re:re,me:me,chg:chg,dis:dis,soc:soc,v:v,rev:rev,fric:fric,isReg:isReg,engOn:engOn,cap:cap,eng:eng,ev:ev,val:val,net:net});
   var short=dem-(Pew+Pm)>0.5&&!isReg&&m!=='ck'&&m!=='rd'&&m!=='ch'&&m!=='cd';
   $('hbOut').innerHTML=note+'<b>'+cap+':</b> '+HBT[m]+'<br><br>محرك البنزين = <b>'+num(Pe)+'</b> kW'+(Pe>0?' (استهلاك تقريبي <b>'+num(fuel)+'</b> لتر/ساعة)':'')+'<br>المحرك الكهربائي = <b>'+num(isReg?Pr:Pm)+'</b> kW'+(isReg?(fric>0.5?' (والباقي <b>'+num(fric)+'</b> kW بالفرامل العادية)':''):'')+(m==='ck'?'<br>قدرة التشغيل بالمولّد = <b>'+num(Pc)+'</b> kW لثواني قليلة':'')+'<br>البطارية: '+(chg>0.05?'عم تتشحن <b>'+num(chg)+'</b> kW':net>0.05?'عم تفرغ <b>'+num(net)+'</b> kW':'ثابتة')+' (تغيّر الشحن <b>'+num(dsoc)+'</b>% بالدقيقة)<br>حرارة ضائعة بالإنفرتر ≈ <b>'+num(loss)+'</b> kW'+(Pg>0&&Pm>0?'<br>💡 كهربا المولّد بتروح مباشرة للمحرك عبر الإنفرتر بدون ما تمر بالبطارية.':'')+(short?'<br>⚠️ القدرة المطلوبة أكبر من المتاح، السيارة ما رح توصل لهالتسارع.':'')+'<br><br>طاقة الحركة عند '+vv+' كم/س = <b>'+num(Ek)+'</b> واط ساعة، والمسترجع منها بالكبح تقريباً <b>'+num(Ek*0.7)+'</b> واط ساعة.<br><small>الإنفرتر هو المترجم بين البطارية (تيار مستمر DC) والمحركات (تيار متناوب AC ثلاثي الأطوار). بيتحكم بسرعة وعزم المحرك بتغيير التردد والجهد، وبيشتغل بالعكس (AC إلى DC) عند الشحن والكبح. القوانين: قدرة البطارية = قدرة المحرك ÷ (كفاءة المحرك × كفاءة الإنفرتر). طاقة الحركة = ½ × الكتلة × السرعة². الشحن والتفريغ محدودين (شحن 30 kW، تفريغ 45 kW). كل القيم تقريبية للتعلم.</small>';
 }
@@ -1622,30 +1772,15 @@ $('snV').addEventListener('input',sn);
 (function(){var s=SNS[0],r=$('snV');r.min=s.min;r.max=s.max;r.step=s.st;r.value=s.val})();
 sn();
 /* تشريح المحرك */
-var ANP={spark:['شمعة الإشعال','بتطلّع شرارة كهربائية بنهاية شوط الضغط لتشعل الخليط. بتشتغل بجهد عالي (آلاف الفولتات) من بوبينة الإشعال.'],iv:['صمام السحب','بيفتح لدخول الهوا والبنزين لما الكباس ينزل بشوط السحب.'],ev:['صمام العادم','بيفتح لخروج غازات الاحتراق لما الكباس يطلع بشوط العادم.'],cam:['عمود الكامات','كل كامة بتدفع صمام لتفتحه، وزنبرك بيسكّره. بيلف بنص سرعة الكرنك.'],head:['رأس الأسطوانة','بيسكّر الأسطوانة من فوق، وفيه الصمامات والشمعة وممرات الماء.'],piston:['الكباس','بيتحرك طلوع ونزول، وبياخد قوة الاحتراق وبينقلها للكرنك.'],rings:['الحلقات (الشنابر)','بتسد الفراغ بين الكباس والأسطوانة، وبتمنع تسرب الغاز، وبتكشط الزيت الزايد.'],rod:['ذراع التوصيل','بيربط الكباس بعمود الكرنك وبينقل القوة بينهم.'],crank:['عمود الكرنك','بيحوّل حركة الكباس (طلوع ونزول) لدوران، ومنه بتطلع قدرة المحرك للعجلات.'],block:['كتلة الأسطوانات','الهيكل الرئيسي للمحرك: فيه الأسطوانات ومجاري الماء والزيت.'],water:['مجاري ماء التبريد','ماء بيمر حوالين الأسطوانة بياخد الحرارة ويوديها للرادياتير.'],pan:['كارتير الزيت','بيجمع الزيت، ومنه بتسحبه مضخة الزيت لتزييت المحامل والكباس.']};
+var ANP={spark:['شمعة الإشعال','بتطلّع شرارة كهربائية بنهاية شوط الضغط لتشعل الخليط. بتشتغل بجهد عالي (آلاف الفولتات) من بوبينة الإشعال.'],iv:['صمام السحب','بيفتح لدخول الهوا والبنزين لما الكباس ينزل بشوط السحب، وبيسكّره زنبرك.'],ev:['صمام العادم','بيفتح لخروج غازات الاحتراق لما الكباس يطلع بشوط العادم، وبيتحمل حرارة عالية جداً.'],cam:['عمود الكامات','كل كامة بتدفع صمام لتفتحه. بيلف بنص سرعة الكرنك، لأنه كل صمام بيفتح مرة كل دورتين.'],head:['رأس الأسطوانة','بيسكّر الأسطوانة من فوق، وفيه الصمامات والشمعة وممرات السحب والعادم وممرات ماء التبريد.'],piston:['الكباس','بيتحرك طلوع ونزول، وبياخد قوة الاحتراق وبينقلها لذراع التوصيل. مصنوع غالباً من ألمنيوم.'],rings:['الحلقات (الشنابر)','بتسد الفراغ بين الكباس والأسطوانة، وبتمنع تسرب الغاز، وبتكشط الزيت الزايد من الجدار.'],rod:['ذراع التوصيل','بيربط الكباس بعمود الكرنك وبينقل القوة بينهم، وبيتحمل ضغط وشد كبيرين.'],crank:['عمود الكرنك','بيحوّل حركة الكباس (طلوع ونزول) لدوران، ومنه بتطلع قدرة المحرك للعجلات. الثقل المقابل بيوازن الحركة.'],block:['كتلة الأسطوانات','الهيكل الرئيسي للمحرك: فيه الأسطوانات ومجاري الماء والزيت ومساند عمود الكرنك.'],water:['مجاري ماء التبريد','ماء بيمر حوالين الأسطوانة بياخد الحرارة ويوديها للرادياتير.'],pan:['كارتير الزيت','بيجمع الزيت، ومنه بتسحبه مضخة الزيت لتزييت المحامل والكباس وتبريدهم.'],inm:['مجرى السحب','بيوصّل الهوا (والبنزين) من الفلتر والخانق لصمام السحب.'],exm:['مجرى العادم','بيطلّع غازات الاحتراق الساخنة للأنبوب والكتالايزر والمخمد.']};
 (function(){
-  var P=function(k,c){return '<g class="ap" data-p="'+k+'">'+c+'</g>'};
-  var o='';
-  o+=P('water','<rect x="76" y="92" width="14" height="100" style="fill:#60a5fa;opacity:.7"/><rect x="190" y="92" width="14" height="100" style="fill:#60a5fa;opacity:.7"/>');
-  o+=P('block','<path d="M76 92V200H204V92" style="fill:none;stroke:var(--ink);stroke-width:3"/><path d="M90 92V200M190 92V200" style="stroke:var(--ink);stroke-width:2"/><rect x="76" y="92" width="4" height="108" style="fill:var(--line)"/>');
-  o+=P('head','<rect x="76" y="52" width="128" height="40" rx="4" style="fill:var(--line);stroke:var(--ink);stroke-width:2.5"/>');
-  o+=P('spark','<rect x="136" y="26" width="8" height="30" style="fill:var(--mute)"/><rect x="139" y="56" width="2" height="14" style="fill:#fde047"/>');
-  o+=P('iv','<rect x="108" y="22" width="4" height="52" style="fill:#3b82f6"/><rect x="98" y="74" width="24" height="5" style="fill:#3b82f6"/>');
-  o+=P('ev','<rect x="168" y="22" width="4" height="52" style="fill:#f59e0b"/><rect x="158" y="74" width="24" height="5" style="fill:#f59e0b"/>');
-  o+=P('cam','<circle cx="110" cy="14" r="9" style="fill:var(--card);stroke:var(--ink);stroke-width:2"/><ellipse cx="110" cy="18" rx="4" ry="9" style="fill:var(--ink);opacity:.7"/><circle cx="170" cy="14" r="9" style="fill:var(--card);stroke:var(--ink);stroke-width:2"/><ellipse cx="170" cy="18" rx="4" ry="9" style="fill:var(--ink);opacity:.7"/>');
-  o+=P('piston','<rect x="94" y="120" width="92" height="38" rx="4" style="fill:var(--acc);opacity:.9"/>');
-  o+=P('rings','<path d="M94 126H186M94 132H186M94 138H186" style="stroke:var(--ink);stroke-width:2.5"/>');
-  o+=P('rod','<path d="M140 156L140 226" style="stroke:var(--ink);stroke-width:7;stroke-linecap:round"/><circle cx="140" cy="156" r="5" style="fill:var(--card);stroke:var(--ink);stroke-width:2"/>');
-  o+=P('crank','<circle cx="140" cy="242" r="20" style="fill:none;stroke:var(--mute);stroke-dasharray:3 3"/><circle cx="140" cy="226" r="7" style="fill:var(--ink)"/><circle cx="140" cy="242" r="7" style="fill:var(--ink)"/><circle cx="140" cy="262" r="12" style="fill:var(--mute)"/>');
-  o+=P('pan','<path d="M76 268Q140 296 204 268" style="fill:none;stroke:var(--ink);stroke-width:3"/>');
-  o+='<g style="fill:var(--ink);font-size:9.5"><text x="215" y="30">شمعة</text><text x="215" y="76">رأس</text><text x="215" y="140">كباس</text><text x="215" y="200">كتلة</text><text x="215" y="246">كرنك</text><text x="215" y="282">كارتير</text></g>';
-  $('anSvg').innerHTML=o;
+  $('anSvg').innerHTML=engSvg(420,'anat',0.6,'a');
   $('anSvg').addEventListener('click',function(e){
     var t=e.target;while(t&&t!==this&&!(t.getAttribute&&t.getAttribute('data-p')))t=t.parentNode;
     if(!t||t===this)return;
-    [].forEach.call(this.querySelectorAll('.ap'),function(x){x.classList.remove('sel')});
-    t.classList.add('sel');
-    var d=ANP[t.getAttribute('data-p')];
+    var key=t.getAttribute('data-p');
+    [].forEach.call(this.querySelectorAll('.hs'),function(x){x.classList.toggle('sel',x.getAttribute('data-p')===key)});
+    var d=ANP[key];
     $('anOut').innerHTML='<b>'+d[0]+'</b><br>'+d[1];
   });
 })();
@@ -1677,8 +1812,14 @@ Object.keys(N3).forEach(function(id){var sc=$(id);if(!sc)return;var d=document.c
 CAT.forEach(function(c){if(c[0]==='محرك')c[1].push('t57');if(c[0]==='مركبة')c[1].push('t58')});
 CAT.unshift(['محاكاة',['t53','t54','t59','t55','t56']]);
 $('cats').innerHTML='';
-CAT.forEach(function(c,i){var b=document.createElement('button');b.textContent=c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
+CAT.forEach(function(c,i){var b=document.createElement('button');b.innerHTML=(typeof CATI!=='undefined'&&CATI[c[0]]?CATI[c[0]]+' ':'')+c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
 setCat(0);
+
+(function(){
+  function gear(cx,cy,z,ro,ri,cls,col){var pts=[],st=2*Math.PI/z,i;for(i=0;i<z;i++){var a=i*st;[[ri,0],[ro,.18],[ro,.42],[ri,.6]].forEach(function(q){var an=a+q[1]*st;pts.push((cx+q[0]*Math.sin(an)).toFixed(1)+','+(cy-q[0]*Math.cos(an)).toFixed(1))})}
+    return '<g class="'+cls+'" style="transform-origin:'+cx+'px '+cy+'px"><polygon points="'+pts.join(' ')+'" style="fill:none;stroke:'+col+';stroke-width:2.5;stroke-linejoin:round"/><circle cx="'+cx+'" cy="'+cy+'" r="'+(ri*.34)+'" style="fill:none;stroke:'+col+';stroke-width:2.5"/><circle cx="'+cx+'" cy="'+cy+'" r="'+(ri*.62)+'" style="fill:none;stroke:'+col+';stroke-width:1.2;stroke-dasharray:4 5"/></g>'}
+  $('heroGears').innerHTML=gear(86,176,18,72,62,'gspin','#22d3ee')+gear(172,100,12,50,42,'gspin2','#a78bfa');
+})();
 </script>
 </body>
 </html>
