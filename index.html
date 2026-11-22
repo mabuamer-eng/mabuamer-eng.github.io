@@ -86,6 +86,7 @@ input:focus,select:focus{outline:2px solid #22d3ee88;outline-offset:1px;border-c
 .hs{pointer-events:all;cursor:pointer}.hs:hover{fill:rgba(34,211,238,.20)}.hs.sel{fill:rgba(34,211,238,.28);stroke:#22d3ee;stroke-width:1.6}
 footer{color:#8b96b3;font-size:.95rem;font-weight:700;padding-top:6px}
 @media(max-width:520px){.owner{font-size:1.7rem}.hero{padding:22px 16px 18px}}
+tr.sl td{background:#16275a}.mk:hover circle{filter:brightness(1.2)}
 </style>
 </head>
 <body>
@@ -96,7 +97,7 @@ footer{color:#8b96b3;font-size:.95rem;font-weight:700;padding-top:6px}
   <div class="owner">المهندس محمد فواز أبو عامر</div>
   <h1>صندوق أدوات المهندس</h1>
   <p class="sub">حاسبات ومحاكاة ورسومات هندسية تفاعلية بمقياس حقيقي: محركات، هايبرد، أوتوماتيك، كهرباء، حرارة وموائع.</p>
-  <div class="stats"><span><b>59</b> أداة</span><span><b>15</b> حالة هايبرد</span><span><b>محاكاة</b> حيّة للمحرك</span><span><b>تشريح</b> تفاعلي</span></div>
+  <div class="stats"><span><b>60</b> أداة</span><span><b>15</b> حالة هايبرد</span><span><b>محاكاة</b> حيّة للمحرك</span><span><b>تشريح</b> تفاعلي</span></div>
 </header>
 
 <div class="cats" id="cats"></div>
@@ -157,6 +158,7 @@ footer{color:#8b96b3;font-size:.95rem;font-weight:700;padding-top:6px}
   <button data-t="t57">كفاءة الوقود</button>
   <button data-t="t58">قدرة السير على الطريق</button>
   <button data-t="t59">تشريح المحرك</button>
+  <button data-t="t60">حساسات المحرك والسيارة</button>
   <button data-t="t1">قانون أوم</button>
   <button data-t="t2">تحويل وحدات</button>
   <button data-t="t3">ألوان المقاومة</button>
@@ -791,6 +793,16 @@ footer{color:#8b96b3;font-size:.95rem;font-weight:700;padding-top:6px}
   <button class="btn" id="rlGo">احسب وارسم</button>
   <svg id="rlSvg" class="dg" viewBox="0 0 300 110"></svg>
   <div class="out" id="rlOut"></div>
+</section>
+
+<section class="card" id="t60">
+  <p class="sub">مقطع محرك احترافي عليه كل الحساسات والمشغّلات الأساسية، ووحدة التحكم ECU. اضغط على أي رقم، وبيطلعلك سلك الإشارة للـ ECU وشرح الحساس وقراءاته.</p>
+  <div class="g" style="margin-bottom:12px"><button class="btn" id="ssBE" style="margin:0">⚙️ حساسات المحرك (15)</button><button class="btn" id="ssBC" style="margin:0;background:#1a2447;box-shadow:none">🚗 حساسات السيارة (10)</button></div>
+  <div id="ssCE"><div class="g"><div><label>دورات المحرك: <b id="ssRv">850</b> RPM</label><input id="ssR" type="range" min="0" max="7000" step="50" value="850"></div><div><label>فتحة الخانق: <b id="ssTv">3</b> %</label><input id="ssT" type="range" min="0" max="100" value="3"></div><div style="grid-column:1/-1"><label>حرارة سائل التبريد: <b id="ssEv">90</b> °C</label><input id="ssE" type="range" min="-20" max="120" value="90"></div></div></div>
+  <div id="ssCC" style="display:none"><div class="g"><div><label>سرعة السيارة: <b id="ssVv">50</b> كم/س</label><input id="ssV" type="range" min="0" max="160" value="50"></div><div><label>ضغط الدواسة: <b id="ssPv">30</b> %</label><input id="ssP" type="range" min="0" max="100" value="30"></div></div></div>
+  <svg id="ssSvg" class="dg" viewBox="0 0 570 570" style="max-width:720px"></svg>
+  <div class="out" id="ssInfo"></div>
+  <div class="out" id="ssTab" style="padding:6px"></div>
 </section>
 
 <footer>بواسطة المهندس محمد فواز أبو عامر 🛠️</footer>
@@ -1513,6 +1525,7 @@ CAT.forEach(function(c,i){var b=document.createElement('button');b.innerHTML=(ty
 setCat(0);
 
 var CATI={'محاكاة':'🎛️','محرك':'⚙️','ميكانيكا':'🛠️','مركبة':'🚗','أوتوماتيك':'🔁','حرارة وموائع':'🌡️','كهرباء وتحويل':'⚡'};
+var ENG_RUN=false,ENG_THR=3;
 /* ===== رسم المحرك (مقطع هندسي) ===== */
 function lgd(id,x2,y2,st){return '<linearGradient id="'+id+'" x1="0" y1="0" x2="'+x2+'" y2="'+y2+'">'+st.map(function(s){return '<stop offset="'+s[0]+'" stop-color="'+s[1]+'"'+(s[2]!=null?' stop-opacity="'+s[2]+'"':'')+'/>'}).join('')+'</linearGradient>'}
 function rgd(id,st){return '<radialGradient id="'+id+'" cx="0.5" cy="0.5" r="0.5">'+st.map(function(s){return '<stop offset="'+s[0]+'" stop-color="'+s[1]+'"'+(s[2]!=null?' stop-opacity="'+s[2]+'"':'')+'/>'}).join('')+'</radialGradient>'}
@@ -1521,7 +1534,7 @@ function flowp(d,col,w,hx,hy,ang){
   return '<path d="'+d+'" style="fill:none;stroke:'+col+';stroke-opacity:.25;stroke-width:'+(w+5)+';stroke-linecap:round"/><path d="'+d+'" class="fl" style="stroke:'+col+';stroke-width:'+w+'"/><polygon points="'+t.map(function(q){return q[0]+','+q[1]}).join(' ')+'" style="fill:'+col+'"/>';
 }
 function engSvg(th,mode,Pn,p){
-  p=p||'e';var A=mode==='anat';
+  p=p||'e';var A=mode==='anat',SN=mode==='sens';
   var r=36,l=118,yc=328,cx=200,ph=(th%360)*Math.PI/180,sn=Math.sin(ph),cs=Math.cos(ph),pinY=yc-(r*cs+Math.sqrt(l*l-r*r*sn*sn)),crown=pinY-34,px=cx+r*sn,py=yc-r*cs,k=Math.floor(th/180)%4;
   var lift=function(t,t0,D){var u=(((t-t0)%720)+720)%720;return u<D?5.5*(1-Math.cos(2*Math.PI*u/D)):0};
   var LI=lift(th,-10,230),LE=lift(th,495,235),wrap=function(d){return ((d+360)%720+720)%720-360},cI=180+0.5*wrap(th-105),cE=180+0.5*wrap(th-612.5);
@@ -1534,6 +1547,9 @@ function engSvg(th,mode,Pn,p){
   o+='<rect x="145" y="138" width="110" height="162" style="fill:#070b19"/><path d="M145 138V300M255 138V300" style="stroke:#c5cde4;stroke-width:1.2;stroke-opacity:.55"/>';
   /* كرنك كيس */
   o+='<rect x="125" y="300" width="150" height="96" style="fill:#070b19"/><rect x="105" y="300" width="20" height="96" style="fill:url(#'+p+'M)"/><rect x="275" y="300" width="20" height="96" style="fill:url(#'+p+'M)"/>';
+
+  if(SN){var tw='',i2;for(i2=2;i2<60;i2++){var a0=(i2*6-1.5)*Math.PI/180,a1=(i2*6+1.5)*Math.PI/180;tw+='M'+(56*Math.sin(a0)).toFixed(1)+' '+(-56*Math.cos(a0)).toFixed(1)+'L'+(63*Math.sin(a0)).toFixed(1)+' '+(-63*Math.cos(a0)).toFixed(1)+'L'+(63*Math.sin(a1)).toFixed(1)+' '+(-63*Math.cos(a1)).toFixed(1)+'L'+(56*Math.sin(a1)).toFixed(1)+' '+(-56*Math.cos(a1)).toFixed(1)+'Z'}
+    o+='<g transform="translate(200,328) rotate('+(th%360)+')"><circle r="56" style="fill:none;stroke:#475569;stroke-width:3"/><path d="'+tw+'" style="fill:#94a3b8;stroke:#1b2238;stroke-width:.4"/><path d="M-3 -56L3 -56L3 -63L-3 -63Z" style="fill:#ef4444;fill-opacity:.0"/></g>'}
   o+='<path d="M105 396L295 396L279 430Q200 441 121 430Z" style="fill:url(#'+p+'M)"/><path d="M127 413Q164 406 200 413T273 413L275 426Q200 435 125 426Z" style="fill:url(#'+p+'O);fill-opacity:.92"/><path d="M127 413Q164 406 200 413T273 413" style="fill:none;stroke:#fde68a;stroke-opacity:.7;stroke-width:1.2"/>';
   /* الرأس */
   o+='<rect x="105" y="70" width="190" height="68" style="fill:url(#'+p+'M)"/><rect x="105" y="70" width="190" height="3" style="fill:#e5e9f5;fill-opacity:.5"/>';
@@ -1576,7 +1592,7 @@ function engSvg(th,mode,Pn,p){
   o+='<g transform="translate('+cx+','+yc+') rotate('+(th%360)+')"><path d="M-18 6L18 6L40 36Q0 64 -40 36Z" style="fill:url(#'+p+'D);stroke:#cbd5e1;stroke-width:1"/><circle cx="0" cy="32" r="6" style="fill:#070b19"/><path d="M-12 -36L12 -36L17 4L-17 4Z" style="fill:url(#'+p+'M);stroke:#1b2238;stroke-width:1"/><circle r="15" style="fill:url(#'+p+'S);stroke:#1b2238;stroke-width:1.2"/><circle r="5" style="fill:#1b2238"/></g>';
   o+='<g transform="translate('+cx+','+pinY+') rotate('+ang+')"><path d="M0 -6L'+rl+' -10L'+rl+' 10L0 6Z" style="fill:url(#'+p+'S);stroke:#1b2238;stroke-width:1"/><path d="M12 0H'+(rl-14)+'" style="stroke:#59627f;stroke-width:3;stroke-linecap:round"/><circle cx="'+rl+'" cy="0" r="13" style="fill:url(#'+p+'S);stroke:#1b2238;stroke-width:1.2"/><circle cx="0" cy="0" r="10" style="fill:url(#'+p+'S);stroke:#1b2238;stroke-width:1"/><circle cx="0" cy="0" r="5.5" style="fill:#2a3250;stroke:#e5e9f5;stroke-width:1"/></g>';
   o+='<circle cx="'+px+'" cy="'+py+'" r="8" style="fill:url(#'+p+'D);stroke:#e5e9f5;stroke-width:1.2"/><circle cx="'+px+'" cy="'+py+'" r="3" style="fill:#0b1124"/>';
-  if(!A){
+  if(!A&&!SN){
     var nm=['شوط السحب','شوط الضغط','شوط الاحتراق','شوط العادم'][k];
     o+='<g style="font-size:10;font-weight:700"><text x="8" y="22" style="fill:#e6ebf7">'+nm+'</text><text x="8" y="38" style="fill:'+(LI>0.3?'#38bdf8':'#8b96b3')+'">صمام السحب: '+(LI>0.3?'مفتوح':'مغلق')+'</text><text x="8" y="54" style="fill:'+(LE>0.3?'#f59e0b':'#8b96b3')+'">صمام العادم: '+(LE>0.3?'مفتوح':'مغلق')+'</text></g>';
   }
@@ -1586,6 +1602,42 @@ function engSvg(th,mode,Pn,p){
     o+=lab(352,22,'شمعة الإشعال',203,26,1)+lab(352,62,'صمام العادم',232,62,1)+lab(352,126,'مجرى العادم',330,100,1)+lab(352,168,'رأس الأسطوانة',280,112,1)+lab(352,226,'الحلقات',250,crown+13,1)+lab(352,290,'ذراع التوصيل',(px+cx)/2+8,(py+pinY)/2,1)+lab(352,368,'كتلة الأسطوانات',286,350,1);
     var hs=function(k,tag,at){return '<'+tag+' class="hs" fill="none" data-p="'+k+'" '+at+'/>'};
     o+=hs('spark','rect','x="190" y="22" width="20" height="108"')+hs('iv','rect','x="156" y="28" width="28" height="104"')+hs('ev','rect','x="216" y="28" width="28" height="104"')+hs('cam','rect','x="150" y="2" width="100" height="34"')+hs('head','rect','x="105" y="70" width="190" height="68"')+hs('piston','rect','x="148" y="'+(crown+22)+'" width="104" height="36"')+hs('rings','rect','x="148" y="'+crown+'" width="104" height="22"')+hs('rod','rect','x="'+(Math.min(px,cx)-12)+'" y="'+(pinY+10)+'" width="'+(Math.abs(px-cx)+24)+'" height="'+(py-pinY-14)+'"')+hs('crank','circle','cx="200" cy="328" r="52"')+hs('water','rect','x="115" y="146" width="24" height="140"')+hs('water','rect','x="261" y="146" width="24" height="140"')+hs('block','rect','x="105" y="290" width="190" height="6"')+hs('pan','rect','x="105" y="396" width="190" height="40"')+hs('inm','rect','x="40" y="80" width="64" height="26"')+hs('exm','rect','x="296" y="80" width="64" height="26"');
+  }
+
+  if(SN){
+    var thr=(typeof ENG_THR==='number'?ENG_THR:3),run=(typeof ENG_RUN!=='undefined'&&ENG_RUN),rot=90*(1-0.95*thr/100);
+    var D='url(#'+p+'D)',M='url(#'+p+'M)',S='url(#'+p+'S)';
+    /* مسار السحب: فلتر، MAF، خانق */
+    o+='<rect x="-106" y="62" width="50" height="62" rx="7" style="fill:#c9b27a;stroke:#6b5a2e;stroke-width:1.6"/>';
+    for(var f=0;f<10;f++)o+='<path d="M'+(-101+f*4.6)+' 68V118" style="stroke:#8a7440;stroke-width:1.2"/>';
+    o+='<rect x="-106" y="62" width="50" height="6" rx="3" style="fill:'+D+'"/><rect x="-106" y="118" width="50" height="6" rx="3" style="fill:'+D+'"/>';
+    o+='<rect x="-56" y="82" width="96" height="22" rx="3" style="fill:'+M+'"/><rect x="-56" y="86" width="96" height="14" style="fill:#070b19"/>';
+    o+='<rect x="-44" y="74" width="34" height="38" rx="5" style="fill:'+M+';stroke:#cbd5e1;stroke-width:1"/><rect x="-44" y="86" width="34" height="14" style="fill:#070b19"/><rect x="-28" y="86" width="2" height="14" style="fill:#f59e0b"/><circle cx="-27" cy="93" r="6" style="fill:#f59e0b;fill-opacity:.25"/><rect x="-36" y="64" width="18" height="10" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/><path d="M-32 66V72M-27 66V72M-22 66V72" style="stroke:#fbbf24;stroke-width:1"/>';
+    o+='<rect x="-54" y="72" width="7" height="20" rx="2" style="fill:'+S+'"/><circle cx="-50.5" cy="92" r="3" style="fill:#f43f5e"/>';
+    o+='<rect x="2" y="76" width="34" height="34" rx="4" style="fill:'+M+';stroke:#cbd5e1;stroke-width:1"/><rect x="2" y="86" width="34" height="14" style="fill:#070b19"/><g transform="translate(19,93) rotate('+rot+')"><path d="M-14 0H14" style="stroke:#e5e9f5;stroke-width:3.4;stroke-linecap:round"/></g><circle cx="19" cy="93" r="3" style="fill:#475569"/><rect x="8" y="66" width="22" height="10" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/>';
+    if(run)o+=flowp('M-96 93H40','#38bdf8',3,40,93,0);
+    /* MAP + سكة الوقود + بخاخ */
+    o+='<rect x="66" y="72" width="14" height="10" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/><rect x="70" y="82" width="6" height="2" style="fill:'+S+'"/>';
+    o+='<rect x="56" y="46" width="48" height="8" rx="2" style="fill:'+M+';stroke:#cbd5e1;stroke-width:.8"/><rect x="50" y="42" width="8" height="12" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/>';
+    o+='<g transform="translate(96,52) rotate(46.5)"><rect x="0" y="-3.5" width="52" height="7" rx="2" style="fill:'+S+';stroke:#1b2238;stroke-width:.8"/><rect x="0" y="-4.5" width="14" height="9" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/><rect x="-6" y="-2" width="6" height="4" style="fill:#fbbf24"/></g>';
+    if(LI>0.3)o+='<path d="M132 90L170 104L152 132Z" style="fill:#e0f2fe;fill-opacity:.55"/>';
+    /* ECT, ضغط وحرارة الزيت */
+    o+='<rect x="92" y="166" width="13" height="12" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/><rect x="105" y="169" width="22" height="6" rx="2" style="fill:'+S+'"/>';
+    o+='<rect x="90" y="262" width="16" height="12" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/><rect x="106" y="265" width="14" height="6" rx="2" style="fill:'+S+'"/>';
+    o+='<rect x="286" y="402" width="12" height="10" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/><rect x="268" y="405" width="18" height="4" rx="1" style="fill:'+S+'"/>';
+    /* الطرق، CKP، CMP، الكويل */
+    o+='<circle cx="298" cy="215" r="8.5" style="fill:'+D+';stroke:#cbd5e1;stroke-width:1.2"/><circle cx="298" cy="215" r="3.2" style="fill:#cbd5e1"/><rect x="304" y="210" width="12" height="10" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/>';
+    o+='<rect x="262" y="321" width="36" height="14" rx="3" style="fill:'+D+';stroke:#cbd5e1;stroke-width:1"/><rect x="298" y="323" width="14" height="10" rx="2" style="fill:#1f2937;stroke:#cbd5e1;stroke-width:.8"/><rect x="258" y="324" width="5" height="8" style="fill:#f43f5e"/>';
+    o+='<rect x="278" y="16" width="22" height="10" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/><path d="M278 21H250" style="stroke:#22d3ee;stroke-width:1.2;stroke-dasharray:3 2"/>';
+    o+='<rect x="196" y="4" width="8" height="18" rx="2" style="fill:#111827"/><rect x="190" y="-26" width="20" height="32" rx="4" style="fill:#1f2937;stroke:#64748b;stroke-width:1.4"/><path d="M193 -20H207M193 -14H207M193 -8H207" style="stroke:#475569;stroke-width:1"/><rect x="210" y="-18" width="12" height="10" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/>';
+    /* العادم: لامدا، كتالايزر */
+    o+='<rect x="322" y="48" width="16" height="12" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/><rect x="324" y="60" width="12" height="18" rx="2" style="fill:'+S+'"/><rect x="321" y="78" width="18" height="6" rx="1" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/>';
+    o+='<rect x="360" y="82" width="12" height="22" style="fill:'+M+'"/><rect x="364" y="72" width="56" height="42" rx="12" style="fill:'+M+';stroke:#cbd5e1;stroke-width:1"/><rect x="372" y="78" width="40" height="30" rx="6" style="fill:#8a4b1a"/>';
+    for(var h=0;h<7;h++)o+='<path d="M'+(376+h*5.6)+' 80V106" style="stroke:#d6a15e;stroke-width:.8;stroke-opacity:.7"/>';
+    for(h=0;h<5;h++)o+='<path d="M374 '+(84+h*5.6)+'H410" style="stroke:#d6a15e;stroke-width:.8;stroke-opacity:.7"/>';
+    if(run)o+='<rect x="364" y="72" width="56" height="42" rx="12" style="fill:'+(LE>0.3?'#ef4444':'#f59e0b')+';fill-opacity:.18"/>';
+    o+='<rect x="420" y="88" width="40" height="10" rx="3" style="fill:'+M+'"/><rect x="432" y="66" width="14" height="22" rx="2" style="fill:'+S+'"/><rect x="432" y="58" width="14" height="10" rx="2" style="fill:'+D+';stroke:#cbd5e1;stroke-width:.8"/><rect x="430" y="82" width="18" height="6" rx="1" style="fill:'+D+'"/>';
+    if(run&&LE>0.3)o+=flowp('M362 93H456','#f59e0b',3,456,93,0);
   }
   return o+'</g>';
 }
@@ -1649,6 +1701,93 @@ function carSvg(S){
   o+='<rect x="20" y="207" width="80" height="9" rx="4" style="fill:#10b981;fill-opacity:.85"/><rect x="100" y="207" width="100" height="9" style="fill:#3b82f6;fill-opacity:.85"/><rect x="200" y="207" width="80" height="9" rx="4" style="fill:#ef4444;fill-opacity:.85"/><polygon points="'+nx+',205 '+(nx-5)+',197 '+(nx+5)+',197" style="fill:#fff"/><g style="fill:#8b96b3;font-size:8.5;text-anchor:middle"><text x="60" y="228">شحن</text><text x="150" y="228">اقتصادي</text><text x="240" y="228">قدرة</text></g>';
   o+='<g style="fill:#e6ebf7;font-size:9.5;text-anchor:middle;font-weight:700"><text x="50" y="246">محرك '+n1(S.Pe)+' kW</text><text x="150" y="246">كهربا '+n1(S.isReg?S.Pr:S.Pm)+' kW</text><text x="250" y="246">بطارية '+(S.chg>0.05?'+'+n1(S.chg):'-'+n1(S.net))+' kW</text></g>';
   return o;
+}
+
+/* ===== الحساسات: مقطع المحرك + السيارة ===== */
+var SE=[
+ {id:'maf',n:1,t:'s',name:'مقياس تدفق الهواء MAF',x:-27,y:66,loc:'بين فلتر الهواء والخانق',pr:'سلك ساخن (Hot-wire): الهواء بيبرّد السلك، فالتيار اللازم للحفاظ على حرارته بيدل على كتلة الهواء.',sig:'جهد 0.5 إلى 4.5 فولت (أو تردد)',typ:'2 إلى 4 غرام/ثانية على الـ idle، وأكثر من 80 عند التسارع القوي',flt:'تقطيع، خليط غني أو فقير، استهلاك عالي (رمز P0100)'},
+ {id:'iat',n:2,t:'s',name:'حرارة الهواء الداخل IAT',x:-50,y:66,loc:'عند مخرج فلتر الهواء',pr:'مقاومة NTC: كل ما زادت الحرارة قلّت المقاومة.',sig:'جهد تناظري (مقسم جهد مع 5 فولت)',typ:'قريبة من حرارة الجو + 10 إلى 20 درجة',flt:'تصحيح كثافة الهواء غلط، صعوبة بالتشغيل بالبرد'},
+ {id:'tps',n:3,t:'s',name:'موضع الخانق TPS',x:19,y:62,loc:'على جسم الخانق (محور الفراشة)',pr:'مقاومة متغيرة (بوتنشيومتر) أو حساس Hall: بتتحرك مع محور الفراشة.',sig:'جهد 0.5 إلى 4.5 فولت',typ:'0.5 فولت مسكّر، و4.5 فولت مفتوح بالكامل',flt:'تأخر بالاستجابة، ارتجاج بالـ idle، رمز P0120'},
+ {id:'map',n:4,t:'s',name:'ضغط المنفّذ MAP',x:73,y:66,loc:'على مجمّع السحب',pr:'غشاء سيليكون بيتشوه مع الضغط (Piezoresistive).',sig:'جهد 0.5 إلى 4.5 فولت',typ:'30 إلى 40 كيلوباسكال على الـ idle، حوالي 100 على الخانق المفتوح',flt:'خليط غير مظبوط، ضعف قدرة (رمز P0105)'},
+ {id:'fp',n:5,t:'s',name:'ضغط الوقود Rail',x:54,y:36,loc:'على سكة الوقود',pr:'مقياس إجهاد (Strain gauge) على غشاء بيتأثر بالضغط.',sig:'جهد 0.5 إلى 4.5 فولت',typ:'3 إلى 4 بار (حقن منفذي)',flt:'صعوبة تشغيل، ضعف قدرة، توقف'},
+ {id:'inj',n:6,t:'a',name:'بخّاخ الوقود Injector',x:114,y:68,loc:'على المنفذ باتجاه صمام السحب',pr:'ملف كهربائي (Solenoid): لما يشتغل بيرفع الإبرة ويرش الوقود.',sig:'نبضة سالب من الـ ECU (عرض النبضة بالملي ثانية)',typ:'حوالي 2 إلى 4 ملي ثانية على الـ idle',flt:'تسريب، تقطيع، خليط مختلف بين الأسطوانات'},
+ {id:'ect',n:7,t:'s',name:'حرارة سائل التبريد ECT',x:86,y:158,loc:'على مجرى الماء بالرأس والكتلة',pr:'مقاومة NTC بتنزل مع ارتفاع الحرارة.',sig:'جهد تناظري (مقسم جهد)',typ:'85 إلى 100 °C بعد التسخين',flt:'مروحة دايماً شغالة، وقود زيادة، صعوبة تشغيل'},
+ {id:'op',n:8,t:'s',name:'ضغط الزيت',x:92,y:252,loc:'على ممر الزيت بالكتلة',pr:'حساس ضغط (Piezoresistive) أو مفتاح ضغط.',sig:'جهد أو إشارة تشغيل/إطفاء للمصباح',typ:'1 إلى 1.5 بار على الـ idle الساخن، و3 إلى 5 بار عند 3000 RPM',flt:'مصباح زيت، خطر تلف المحامل'},
+ {id:'ot',n:9,t:'s',name:'حرارة الزيت',x:304,y:392,loc:'بكارتير الزيت',pr:'مقاومة NTC مغمورة بالزيت.',sig:'جهد تناظري',typ:'90 إلى 110 °C',flt:'تقدير غلط للحمل الحراري'},
+ {id:'kn',n:10,t:'s',name:'حساس الطرق Knock',x:312,y:203,loc:'على جانب الكتلة بين الأسطوانات',pr:'بلّورة كهرضغطية (Piezo): الاهتزاز بيولّد جهد صغير بتردد 6 إلى 15 كيلوهرتز.',sig:'جهد متذبذب صغير (ملي فولت)',typ:'قيمة صغيرة، وبترتفع لما يصير طرق',flt:'ضعف قدرة، أو طرق بدون تصحيح للتوقيت'},
+ {id:'ckp',n:11,t:'s',name:'موضع عمود الكرنك CKP',x:280,y:311,loc:'قبال عجلة الأسنان 60-2 على الكرنك',pr:'حساس Hall أو مغناطيسي: بيعد الأسنان، والفجوة (سنين ناقصين) بتحدد أعلى نقطة.',sig:'نبضات مربعة، تردد = RPM ÷ 60 × 58',typ:'حوالي 800 هرتز على الـ idle (850 RPM)',flt:'المحرك ما بيشتغل أو بيطفي فجأة (P0335)'},
+ {id:'cmp',n:12,t:'s',name:'موضع عمود الكامات CMP',x:292,y:8,loc:'على غطاء الكامات قبال عجلة الكامات',pr:'حساس Hall: بيحدد شوط الأسطوانة 1 (فرق 720°).',sig:'نبضات مربعة، تردد = RPM ÷ 120',typ:'7 إلى 8 هرتز على الـ idle',flt:'تأخر بالتشغيل، حقن غير متسلسل'},
+ {id:'coil',n:13,t:'a',name:'كويل الإشعال Coil',x:222,y:-14,loc:'مباشرة فوق الشمعة (Coil-on-plug)',pr:'محوّل: بيرفع 12 فولت لآلاف الفولتات عند قطع التيار.',sig:'نبضة من الـ ECU (زمن الشحن Dwell 2 إلى 4 ملي ثانية)',typ:'20 إلى 40 كيلوفولت',flt:'تقطيع (Misfire)، ضعف قدرة (P0300)'},
+ {id:'o2u',n:14,t:'s',name:'لامدا قبل الكتالايزر',x:330,y:42,loc:'على مجمّع العادم قبل الكتالايزر',pr:'خلية زركونيا: بتولّد جهد حسب فرق الأكسجين، وبتقفز حول λ=1.',sig:'0.1 إلى 0.9 فولت (أو Wideband)',typ:'بتتذبذب بين 0.1 و0.9 فولت بالحلقة المغلقة',flt:'استهلاك عالي، دخان، رمز P0130'},
+ {id:'o2d',n:15,t:'s',name:'لامدا بعد الكتالايزر',x:439,y:52,loc:'بعد الكتالايزر',pr:'نفس مبدأ الزركونيا، بس بيراقب كفاءة الكتالايزر.',sig:'جهد شبه ثابت',typ:'حوالي 0.6 إلى 0.7 فولت وثابت',flt:'كفاءة كتالايزر منخفضة (P0420)'}];
+var SCx=[
+ {id:'absf',n:1,t:'s',name:'سرعة العجلة الأمامية ABS',x:86,y:152,loc:'قبال الحلقة المسننة على الجنط/المحور',pr:'Hall أو مغناطيسي: بيعد أسنان الحلقة اللي بتلف مع العجلة.',sig:'تردد نبضات يتناسب مع سرعة العجلة',typ:'مثلاً 48 سن: حوالي 100 هرتز عند 17 كم/س تقريباً',flt:'ABS و ESP متعطلين، مصباح ABS'},
+ {id:'absr',n:2,t:'s',name:'سرعة العجلة الخلفية ABS',x:252,y:152,loc:'قبال الحلقة المسننة بالعجلة الخلفية',pr:'نفس مبدأ الأمامية.',sig:'تردد نبضات',typ:'نفس الأمامية بالطريق المستقيم',flt:'ABS والـ ESP والـ TCS'},
+ {id:'app',n:3,t:'s',name:'دواسة الوقود APP',x:140,y:150,loc:'عند دواسة الوقود',pr:'حساس Hall مزدوج (قناتين) للأمان.',sig:'قناتين: 0.5 إلى 4.5 فولت، والثانية نصف الأولى',typ:'0.7 فولت بدون ضغط، و4.5 فولت ضغط كامل',flt:'ما في استجابة، وضع الطوارئ (Limp)'},
+ {id:'brk',n:4,t:'s',name:'دواسة الفرامل',x:158,y:150,loc:'عند دواسة الفرامل',pr:'حساس موضع + مفتاح ضوء الفرامل.',sig:'جهد تناظري + إشارة رقمية',typ:'بيحدد نسبة الكبح الاسترجاعي مقابل الفرامل',flt:'إضاءة فرامل ثابتة، كبح استرجاعي ضعيف'},
+ {id:'str',n:5,t:'s',name:'زاوية المقود',x:150,y:92,loc:'عند عمود المقود',pr:'حساس مغناطيسي/بصري بيقيس زاوية الدوران.',sig:'إشارة CAN رقمية',typ:'0° للمستقيم، وحتى ±540°',flt:'ESP وتوجيه مساعد متعطلين'},
+ {id:'bat',n:6,t:'s',name:'بطارية HV: جهد وتيار وحرارة',x:212,y:132,loc:'داخل حزمة البطارية',pr:'مقسم جهد + حساس تيار Hall + NTC لكل مجموعة خلايا.',sig:'CAN من وحدة إدارة البطارية BMS',typ:'جهد حوالي 200 إلى 270 فولت، حرارة 20 إلى 45 °C',flt:'تحديد القدرة، شحن غير مظبوط، تعطل الهايبرد'},
+ {id:'rs1',n:7,t:'s',name:'Resolver للمولّد MG1',x:93,y:124,loc:'على عمود MG1',pr:'محوّل دوّار: بيعطي إشارتين جيب/جيب تمام تدل على زاوية الدوار.',sig:'إشارات AC (Sin/Cos)',typ:'الإنفرتر بيحتاجه ليتحكم بالتوقيت بدقة',flt:'اهتزاز، توقف الهايبرد، رمز Resolver'},
+ {id:'rs2',n:8,t:'s',name:'Resolver للمحرك MG2',x:115,y:124,loc:'على عمود MG2',pr:'نفس المبدأ.',sig:'Sin/Cos',typ:'بيعطي السرعة والزاوية للإنفرتر',flt:'ضعف تسارع، تحذير هايبرد'},
+ {id:'inv',n:9,t:'s',name:'حرارة الإنفرتر',x:103,y:96,loc:'على لوحة الترانزستورات (IGBT)',pr:'NTC على الألواح.',sig:'جهد تناظري',typ:'40 إلى 80 °C',flt:'تحديد القدرة، تحذير حرارة'},
+ {id:'ectc',n:10,t:'s',name:'حرارة المحرك ECT',x:47,y:120,loc:'على مجرى الماء',pr:'NTC.',sig:'جهد تناظري',typ:'85 إلى 100 °C',flt:'مروحة وخليط غير مظبوطين'}];
+function ntcV(T){var Tk=T+273.15,R=2500*Math.exp(3500*(1/Tk-1/298.15));return 5*R/(R+2200)}
+function liveE(rpm,thr,ect,tm){
+  var run=rpm>=300,cl=run&&ect>70,map=run?Math.min(101,28+73*Math.pow(thr/100,0.8)*(0.45+0.55*Math.min(1,rpm/5000))):101;
+  var ve=0.55+0.35*thr/100,maf=run?1000*1.6e-3*(rpm/120)*ve*1.184*(map/101):0,iat=25+0.3*(ect-25);
+  var perCyl=run?maf/(rpm/120)/4*1000:0,pw=perCyl/14.7/1.94,adv=run?Math.max(0,Math.min(40,10+22*rpm/7000-8*thr/100)):0;
+  var kn=(run&&thr>80&&rpm<2500)?0.8:0.12,op=run?(100+350*rpm/7000)*(1+Math.max(0,90-ect)/250):0;
+  var o2=cl?0.45+0.4*Math.sin(tm*2*Math.PI*1.4):0.2;
+  return {maf:[num(maf)+' غ/ث',0.5+maf/150*4],iat:[num(iat)+' °C',ntcV(iat)],tps:[num(thr)+' %',0.5+4*thr/100],map:[num(map)+' kPa',0.5+(map-20)/230*4],fp:['350 kPa',0.5+350/700*4],inj:[run?num(pw)+' ms':'0',null],ect:[num(ect)+' °C',ntcV(ect)],op:[num(op)+' kPa',0.5+op/700*4],ot:[num(run?ect+12:ect)+' °C',ntcV(run?ect+12:ect)],kn:[kn>0.5?'طرق!':'هادئ',kn],ckp:[num(rpm/60*58)+' Hz',null],cmp:[num(rpm/120)+' Hz',null],coil:[run?num(adv)+'° قبل الأعلى':'0',null],o2u:[cl?num(o2)+' V':'مفتوحة',o2],o2d:[cl?'0.65 V':'0.10 V',cl?0.65:0.1]};
+}
+function liveC(v,ped){
+  var wf=v/3.6/(2*Math.PI*0.31)*48,ma=Math.abs(v)/3.6/0.31*3.9*60/(2*Math.PI);
+  return {absf:[num(wf)+' Hz',null],absr:[num(wf)+' Hz',null],app:[num(0.5+4*ped/100)+' V',null],brk:['0 %',null],str:['0°',null],bat:['201 V · '+num(ped*0.4-6)+' A · 32 °C',null],rs1:['نشط',null],rs2:[num(ma)+' RPM',null],inv:[num(40+ped*0.3)+' °C',null],ectc:['90 °C',null]};
+}
+var SS={view:'E',sel:'maf',th:0,tm:0,tmr:null};
+function ssWire(){
+  if(SS.view!=='E')return '';
+  var d=SE.filter(function(q){return q.id===SS.sel})[0];if(!d)return '';
+  var sx=110+d.x,sy=112+d.y+0,pts;
+  if(sx<330)pts=[[sx,sy],[8,sy],[8,43],[16,43]];else pts=[[sx,sy],[562,sy],[562,86],[95,86],[95,80]];
+  if(d.t==='a')pts=pts.slice().reverse();
+  var path='M'+pts.map(function(q){return q.join(' ')}).join('L'),col=d.t==='a'?'#f59e0b':'#22d3ee',e=pts[pts.length-1],a=pts[pts.length-2],an=Math.atan2(e[1]-a[1],e[0]-a[0])*180/Math.PI;
+  return flowp(path,col,3,e[0],e[1],an);
+}
+function ecuSvg(){return '<rect x="14" y="8" width="160" height="70" rx="10" style="fill:#0d1429;stroke:#38bdf8;stroke-width:1.6"/><rect x="14" y="8" width="160" height="14" rx="10" style="fill:#1f2d52"/><text x="94" y="19" style="fill:#7dd3fc;font-size:9.5;text-anchor:middle;font-weight:800">ECU وحدة التحكم</text><g style="fill:none;stroke:#5b6a95;stroke-width:1.2"><path d="M26 32H162M26 40H162M26 48H162"/></g><g style="fill:#fbbf24"><rect x="24" y="56" width="12" height="9" rx="1"/><rect x="40" y="56" width="12" height="9" rx="1"/><rect x="56" y="56" width="12" height="9" rx="1"/></g><circle cx="150" cy="60" r="4" style="fill:#34d399"/><text x="94" y="70" style="fill:#8b96b3;font-size:7.5;text-anchor:middle">معالج + ذاكرة + برنامج تحكم</text>'}
+function ssEngine(){
+  var rpm=g('ssR'),thr=g('ssT'),ect=g('ssE');
+  global_ENG(rpm,thr);
+  var pm=0,i;for(i=0;i<=180;i++)pm=Math.max(pm,fsc(i*4,10).P);
+  var o=ecuSvg();
+  o+='<g transform="translate(110,100)">'+engSvg(SS.th,'sens',fsc(SS.th,10).P/pm,'s')+'<g transform="translate(0,12)">';
+  SE.forEach(function(d){var sel=d.id===SS.sel,c=d.t==='a'?'#f59e0b':'#22d3ee';o+='<g class="mk" data-p="'+d.id+'" style="cursor:pointer">'+(sel?'<circle cx="'+d.x+'" cy="'+d.y+'" r="13" style="fill:#fff;fill-opacity:.18;stroke:#fff;stroke-width:1.4"/>':'')+'<circle cx="'+d.x+'" cy="'+d.y+'" r="8.6" style="fill:'+c+';stroke:#06101f;stroke-width:1.6"/><text x="'+d.x+'" y="'+(d.y+3.6)+'" style="fill:#06101f;font-size:10;font-weight:800;text-anchor:middle">'+d.n+'</text></g>'});
+  o+='</g></g>'+ssWire();
+  return o;
+}
+function global_ENG(rpm,thr){ENG_RUN=rpm>=300;ENG_THR=thr}
+function ssCar(){
+  var v=g('ssV'),ped=g('ssP');
+  var S={m:'rd',Pe:0,Pew:0,Pg:0,Pm:0,Pr:0,Pc:0,ge:0,re:0,me:0,chg:0,dis:0,soc:62,v:v,rev:false,fric:0,isReg:false,engOn:false,cap:'مواقع حساسات السيارة',eng:'',ev:'',val:0,net:0};
+  var o=carSvg(S).replace(/<g style="fill:#e6ebf7;font-size:9.5[\s\S]*$/,'').replace(/<text x="8" y="34"[^>]*>[^<]*<\/text>/,'').replace(/<rect x="20" y="207"[\s\S]*?<\/g>/,'');
+  o+='<g transform="translate(0,10)">';
+  SCx.forEach(function(d){var sel=d.id===SS.sel;o+='<g class="mk" data-p="'+d.id+'" style="cursor:pointer">'+(sel?'<circle cx="'+d.x+'" cy="'+d.y+'" r="11" style="fill:#fff;fill-opacity:.2;stroke:#fff;stroke-width:1.2"/>':'')+'<circle cx="'+d.x+'" cy="'+d.y+'" r="7.2" style="fill:#22d3ee;stroke:#06101f;stroke-width:1.4"/><text x="'+d.x+'" y="'+(d.y+3.2)+'" style="fill:#06101f;font-size:8.6;font-weight:800;text-anchor:middle">'+d.n+'</text></g>'});
+  return o+'</g>';
+}
+function ssRender(){
+  var E=SS.view==='E',list=E?SE:SCx,rpm=g('ssR'),thr=g('ssT'),ect=g('ssE'),v=g('ssV'),ped=g('ssP');
+  var L=E?liveE(rpm,thr,ect,SS.tm):liveC(v,ped);
+  $('ssSvg').setAttribute('viewBox',E?'0 0 570 570':'0 0 300 205');
+  $('ssSvg').innerHTML=E?ssEngine():ssCar();
+  var d=list.filter(function(q){return q.id===SS.sel})[0]||list[0];SS.sel=d.id;
+  $('ssInfo').innerHTML='<b>#'+d.n+' '+d.name+'</b> <small>('+(d.t==='a'?'مشغّل':'حساس')+')</small><br>الموقع: '+d.loc+'<br>المبدأ: '+d.pr+'<br>الإشارة: '+d.sig+'<br>القيمة الحالية: <b>'+L[d.id][0]+'</b>'+(L[d.id][1]!=null?' ← إشارة <b>'+num(L[d.id][1])+'</b> فولت':'')+'<br>القيم الطبيعية: '+d.typ+'<br>لما يتعطل: '+d.flt;
+  $('ssTab').innerHTML='<table><tr><th>#</th><th>الحساس</th><th>القراءة الحيّة</th><th>الإشارة</th></tr>'+list.map(function(q){var l=L[q.id];return '<tr class="'+(q.id===SS.sel?'sl':'')+'" data-p="'+q.id+'" style="cursor:pointer"><td>'+q.n+'</td><td style="text-align:right">'+q.name+(q.t==='a'?' ⚙️':'')+'</td><td><b>'+l[0]+'</b></td><td>'+(l[1]!=null?num(l[1])+' V':'-')+'</td></tr>'}).join('')+'</table>';
+}
+function ssTick(){
+  if(!$('t60').classList.contains('on'))return;
+  SS.tm+=0.1;
+  if(SS.view==='E'){var rpm=g('ssR');if(rpm>=300)SS.th=(SS.th+3+9*Math.min(1,rpm/7000))%720}
+  ssRender();
 }
 
 /* ===== محاكاة وتفاعل ===== */
@@ -1809,8 +1948,31 @@ $('rlGo').onclick=function(){
 $('rlGo').onclick();
 var N3={t53:'شوف الكباس والصمامات والشرارة وهي عم تشتغل. الدورة الكاملة 720°: سحب، ضغط، احتراق، عادم.',t54:'بالهايبرد الإنفرتر هو القلب: بيحوّل كهربا البطارية (DC) لكهربا المحركات (AC) والعكس. اختار الحالة، أو شغّل الرحلة التلقائية.',t55:'مفتاح صغير بيشغّل الريليه (مفتاح كهربائي)، والريليه بيشغّل تيار كبير للمصابيح بأمان.',t56:'الحساسات بتحوّل الحرارة والضغط والسرعة لجهد كهربائي يفهمه كمبيوتر السيارة.',t57:'كم من طاقة الوقود بتتحول لشغل فعلي، وكم بتضيع حرارة.',t58:'ليش بتصرف السيارة وقود أكتر بالسرعة العالية؟ لأنه مقاومة الهوا بتزيد بشكل كبير.',t59:'قسم المحرك بالرسمة، واضغط على كل قطعة لتعرف شو بتعمل.'};
 Object.keys(N3).forEach(function(id){var sc=$(id);if(!sc)return;var d=document.createElement('div');d.className='say';d.innerHTML='💡 '+N3[id];var p=sc.querySelector('.sub');if(p)p.parentNode.insertBefore(d,p.nextSibling)});
+
+/* ===== ربط تبويب الحساسات ===== */
+(function(){
+  function upd(){$('ssRv').textContent=$('ssR').value;$('ssTv').textContent=$('ssT').value;$('ssEv').textContent=$('ssE').value;$('ssVv').textContent=$('ssV').value;$('ssPv').textContent=$('ssP').value}
+  ['ssR','ssT','ssE','ssV','ssP'].forEach(function(id){$(id).addEventListener('input',function(){upd();ssRender()})});
+  function view(v){
+    SS.view=v;SS.sel=v==='E'?'maf':'absf';
+    $('ssCE').style.display=v==='E'?'block':'none';$('ssCC').style.display=v==='E'?'none':'block';
+    $('ssBE').style.background=v==='E'?'':'#1a2447';$('ssBE').style.boxShadow=v==='E'?'':'none';
+    $('ssBC').style.background=v==='C'?'':'#1a2447';$('ssBC').style.boxShadow=v==='C'?'':'none';
+    ssRender();
+  }
+  $('ssBE').onclick=function(){view('E')};$('ssBC').onclick=function(){view('C')};
+  $('t60').addEventListener('click',function(e){
+    var t=e.target;while(t&&t!==this&&!(t.getAttribute&&t.getAttribute('data-p')))t=t.parentNode;
+    if(!t||t===this)return;
+    SS.sel=t.getAttribute('data-p');ssRender();
+  });
+  setInterval(ssTick,100);
+  var sc=$('t60'),d=document.createElement('div');d.className='say';d.innerHTML='💡 الـ ECU هو كمبيوتر السيارة. الحساسات بتبعتله معلومات (حرارة، ضغط، سرعة...) والمشغّلات (بخاخ، كويل) بتنفذ أوامره. حرّك الشرائح وشوف كيف بتتغير قراءات كل حساس.';
+  var p=sc.querySelector('.sub');if(p)p.parentNode.insertBefore(d,p.nextSibling);
+  upd();ssRender();
+})();
 CAT.forEach(function(c){if(c[0]==='محرك')c[1].push('t57');if(c[0]==='مركبة')c[1].push('t58')});
-CAT.unshift(['محاكاة',['t53','t54','t59','t55','t56']]);
+CAT.unshift(['محاكاة',['t53','t54','t60','t59','t55','t56']]);
 $('cats').innerHTML='';
 CAT.forEach(function(c,i){var b=document.createElement('button');b.innerHTML=(typeof CATI!=='undefined'&&CATI[c[0]]?CATI[c[0]]+' ':'')+c[0];b.onclick=function(){setCat(i)};$('cats').appendChild(b)});
 setCat(0);
